@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "455984127761",
+    "project_id": "shoppixa-d0298",
+    "storage_bucket": "shoppixa-d0298.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455984127761:android:cd0f964b48cad449db36b0",
+        "android_client_info": {
+          "package_name": "com.shoppixa.shoppixa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTXdFO4Rd_f-gT_YjZa1npQZiiwiRwztE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
