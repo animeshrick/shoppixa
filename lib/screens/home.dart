@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shoppixa/utils/routes/route_names.dart';
 
 import '../firebase/notification/notification_service.dart';
 
@@ -11,7 +13,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   FirebaseNotificationService firebaseNotificationService =
-  FirebaseNotificationService();
+      FirebaseNotificationService();
 
   @override
   void initState() {
@@ -28,12 +30,17 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Center(
+      body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Home"),
+            const Text("Home"),
+            ElevatedButton(
+                onPressed: () {
+                  context.go(MyRoutes.notification, extra: {"id": "1"});
+                },
+                child: const Text("Notification")),
           ],
         ),
       ),

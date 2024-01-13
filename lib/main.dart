@@ -2,7 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shoppixa/screens/home.dart';
+import 'package:shoppixa/utils/routes/route_config.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 import 'firebase_options.dart';
 
@@ -19,6 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -27,8 +29,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Home(),
+    return MaterialApp.router(
+      routerConfig: RouteConfig().router,
     );
   }
 }

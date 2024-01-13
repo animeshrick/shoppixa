@@ -6,13 +6,16 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoppixa/screens/notification_screen.dart';
+import 'package:shoppixa/utils/log.dart';
+import 'package:shoppixa/utils/routes/route_names.dart';
 
 class FirebaseNotificationService {
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
   final FlutterLocalNotificationsPlugin localNotification =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   Future<void> requestNotificationPermission() async {
     /// request permission
@@ -39,7 +42,7 @@ class FirebaseNotificationService {
       /// provisional
       debugPrint('User granted provisional permission');
       NotificationSettings settings =
-      await firebaseMessaging.getNotificationSettings();
+          await firebaseMessaging.getNotificationSettings();
       debugPrint('User granted provisional permission $settings');
     }
 
@@ -70,7 +73,7 @@ class FirebaseNotificationService {
 
     /// android
     var initializationSettingsAndroid =
-    const AndroidInitializationSettings("@mipmap/ic_launcher");
+        const AndroidInitializationSettings("@mipmap/ic_launcher");
 
     /// ios
     var iosSetting = const DarwinInitializationSettings();
@@ -81,9 +84,9 @@ class FirebaseNotificationService {
 
     await localNotification.initialize(initSetting,
         onDidReceiveNotificationResponse: (payload) {
-          print("Local-Notification handleMessage");
-          handleMessage(context, message);
-        });
+      print("Local-Notification handleMessage");
+      handleMessage(context, message);
+    });
   }
 
   void firebaseInit(BuildContext context) {
@@ -95,12 +98,15 @@ class FirebaseNotificationService {
         debugPrint('Message Title: ${message.notification?.title ?? ""}');
         debugPrint('Message Data: ${message.data}');
       }
-      if (Platform.isAndroid) {
-        initLocalNotifications(context, message);
-        showNotification(message);
-      } else {
+      // if (Platform.isAndroid) {
+      initLocalNotifications(context, message);
+      showNotification(message);
+      /*} else if(kIsWeb) {
+        /// web
+        print("kisweb");
+      }else {
         /// ios
-      }
+      }*/
     });
   }
 
@@ -112,7 +118,7 @@ class FirebaseNotificationService {
     );
 
     AndroidNotificationDetails androidNotificationDetails =
-    AndroidNotificationDetails(
+        AndroidNotificationDetails(
       channel.channelId.toString(),
       channel.channelName.toString(),
       channelDescription: "your channel description",
@@ -122,7 +128,7 @@ class FirebaseNotificationService {
     );
 
     const DarwinNotificationDetails darwinNotificationDetails =
-    DarwinNotificationDetails(
+        DarwinNotificationDetails(
       presentAlert: true,
       presentBadge: true,
       presentSound: true,
@@ -133,6 +139,7 @@ class FirebaseNotificationService {
       iOS: darwinNotificationDetails,
     );
 
+    AppLog().log('localNotification will show');
     Future.delayed(Duration.zero, () async {
       await localNotification.show(
         0,
@@ -146,7 +153,7 @@ class FirebaseNotificationService {
   Future<void> setupInteractMessage(BuildContext context) async {
     /// when app is killed/ terminated
     RemoteMessage? initialMessage =
-    await FirebaseMessaging.instance.getInitialMessage();
+        await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
       print("when app is killed/ terminated");
       handleMessage(context, initialMessage);
@@ -161,12 +168,13 @@ class FirebaseNotificationService {
 
   void handleMessage(BuildContext context, RemoteMessage message) {
     if (message.data != {}) {
-      Navigator.push(
+      /* Navigator.push(
           context,
           MaterialPageRoute(
               builder: (_) => NotificationScreen(
                 dataFromNotification: message.data ?? {},
-              )));
+              )));*/
+      context.go(MyRoutes.notification, extra: message.data);
     }
   }
 }
