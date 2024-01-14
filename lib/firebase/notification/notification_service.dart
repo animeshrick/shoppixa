@@ -174,7 +174,12 @@ class FirebaseNotificationService {
               builder: (_) => NotificationScreen(
                 dataFromNotification: message.data ?? {},
               )));*/
-      context.go(MyRoutes.notification, extra: message.data);
+      if(kIsWeb){
+        context.goNamed(MyRoutes.notification, extra: message.data);
+      }
+      else {
+        context.pushNamed(MyRoutes.notification, extra: message.data);
+      }
     }
   }
 }

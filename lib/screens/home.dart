@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
             const Text("Home"),
             ElevatedButton(
                 onPressed: () {
-                  context.go(MyRoutes.notification, extra: {"id": "1"});
+                  //context.go(MyRoutes.notification, extra: {"id": "1"});
                 },
                 child: const Text("Notification")),
           ],
