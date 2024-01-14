@@ -101,6 +101,10 @@ class FirebaseNotificationService {
       // if (Platform.isAndroid) {
       initLocalNotifications(context, message);
       showNotification(message);
+      if(kIsWeb) {
+        /// web
+        print("kisweb");
+      }
       /*} else if(kIsWeb) {
         /// web
         print("kisweb");
