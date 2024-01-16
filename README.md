@@ -17,3 +17,5 @@ samples, guidance on mobile development, and a full API reference.
 
 
 -t lib/webMsite/web_main.dart --web-browser-flag "--disable-web-security"
+-t lib/webMsite/web_main.dart --web-port=1998 --web-hostname 192.168.5.168
+
