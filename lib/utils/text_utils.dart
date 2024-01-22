@@ -1,7 +1,7 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'log.dart';
 
 class TextUtils {
   bool isNonZeroNumericValue(String txt) {
@@ -117,7 +117,7 @@ class TextUtils {
           (onValue) {
             if (onValue != null) {
               onValue.data.forEach((k, v) {
-                AppLog().log('$k,$v');
+                //AppLog().log('$k,$v');
               });
             }
           },
