@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shoppixa/screens/auth/register.dart';
 
 import '../../utils/routes/route_names.dart';
 
@@ -159,10 +158,9 @@ class AppSignIn extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => AppSingUp()),
-                        )
+                        kIsWeb
+                            ? context.goNamed(MyRoutes.register)
+                            : context.pushNamed(MyRoutes.register)
                       },
                       child: const Text(
                         "Sign Up",

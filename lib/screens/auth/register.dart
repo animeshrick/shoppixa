@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../utils/routes/route_names.dart';
-import 'login.dart';
 
 class AppSingUp extends StatelessWidget {
   const AppSingUp({super.key});
@@ -215,11 +214,9 @@ class AppSingUp extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AppSignIn()),
-                        );
+                        kIsWeb
+                            ? context.goNamed(MyRoutes.login)
+                            : context.pushNamed(MyRoutes.login);
                       },
                       child: const Text(
                         "Sign In",
