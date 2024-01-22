@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:app_settings/app_settings.dart';
@@ -7,8 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shoppixa/screens/notification_screen.dart';
-import 'package:shoppixa/utils/log.dart';
+import 'package:shoppixa/utils/logger.dart';
 import 'package:shoppixa/utils/routes/route_names.dart';
 
 class FirebaseNotificationService {
@@ -28,7 +26,7 @@ class FirebaseNotificationService {
       provisional: false,
       sound: true,
     );
-    debugPrint('User permission status: ${settings.authorizationStatus}');
+    AppLog.w('User permission status: ${settings.authorizationStatus}');
 
     /// Permission granted
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
@@ -40,24 +38,24 @@ class FirebaseNotificationService {
     /// Permission provisional
     else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
       /// provisional
-      debugPrint('User granted provisional permission');
+      AppLog.w('User granted provisional permission');
       NotificationSettings settings =
           await firebaseMessaging.getNotificationSettings();
-      debugPrint('User granted provisional permission $settings');
+      AppLog.w('User granted provisional permission $settings');
     }
 
     /// Permission denied
     else {
       /// open settings for permission
       AppSettings.openAppSettings(type: AppSettingsType.notification);
-      debugPrint('User declined or has not accepted permission');
+      AppLog.w('User declined or has not accepted permission');
     }
   }
 
   Future<String> getDeviceToken() async {
     /// device token
     String? fcmToken = await firebaseMessaging.getToken();
-    debugPrint("Token: $fcmToken");
+    AppLog.w("Token: $fcmToken");
     return fcmToken ?? "";
   }
 
@@ -93,15 +91,15 @@ class FirebaseNotificationService {
     /// handle on message event
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (kDebugMode) {
-        //debugPrint('Got a message whilst in the foreground!');
-        debugPrint('Message Body: ${message.notification?.body ?? ""}');
-        debugPrint('Message Title: ${message.notification?.title ?? ""}');
-        debugPrint('Message Data: ${message.data}');
+        //AppLog.w('Got a message whilst in the foreground!');
+        AppLog.w('Message Body: ${message.notification?.body ?? ""}');
+        AppLog.w('Message Title: ${message.notification?.title ?? ""}');
+        AppLog.w('Message Data: ${message.data}');
       }
       // if (Platform.isAndroid) {
       initLocalNotifications(context, message);
       showNotification(message);
-      if(kIsWeb) {
+      if (kIsWeb) {
         /// web
         print("kisweb");
       }
@@ -143,7 +141,7 @@ class FirebaseNotificationService {
       iOS: darwinNotificationDetails,
     );
 
-    AppLog().log('localNotification will show');
+    AppLog.w('localNotification will show');
     Future.delayed(Duration.zero, () async {
       await localNotification.show(
         0,
@@ -178,10 +176,9 @@ class FirebaseNotificationService {
               builder: (_) => NotificationScreen(
                 dataFromNotification: message.data ?? {},
               )));*/
-      if(kIsWeb){
+      if (kIsWeb) {
         context.goNamed(MyRoutes.notification, extra: message.data);
-      }
-      else {
+      } else {
         context.pushNamed(MyRoutes.notification, extra: message.data);
       }
     }

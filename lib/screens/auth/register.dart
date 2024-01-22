@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../utils/routes/route_names.dart';
 
-class AppSignIn extends StatelessWidget {
-  const AppSignIn({super.key});
+class AppSingUp extends StatelessWidget {
+  const AppSingUp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,60 @@ class AppSignIn extends StatelessWidget {
                     height: 130,
                     alignment: Alignment.center,
                     child: const FlutterLogo(),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  const Row(
+                    children: <Widget>[
+                      Flexible(
+                        flex: 1,
+                        child: TextField(
+                          showCursor: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color(0xFFF2F3F5),
+                            hintStyle: TextStyle(
+                              color: Color(0xFF666666),
+                            ),
+                            hintText: "First Name",
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: TextField(
+                          showCursor: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                              borderSide: BorderSide(
+                                width: 0,
+                                style: BorderStyle.none,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: Color(0xFFF2F3F5),
+                            hintStyle: TextStyle(
+                              color: Color(0xFF666666),
+                            ),
+                            hintText: "Last Name",
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 15,
@@ -84,12 +138,7 @@ class AppSignIn extends StatelessWidget {
                       ),
                       filled: true,
                       prefixIcon: Icon(
-                        Icons.lock_outline,
-                        color: Color(0xFF666666),
-                        size: 17,
-                      ),
-                      suffixIcon: Icon(
-                        Icons.remove_red_eye,
+                        Icons.code,
                         color: Color(0xFF666666),
                         size: 17,
                       ),
@@ -97,23 +146,31 @@ class AppSignIn extends StatelessWidget {
                       hintStyle: TextStyle(
                         color: Color(0xFF666666),
                       ),
-                      hintText: "Password",
+                      hintText: "Invitation Code",
                     ),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   const SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      "Forgot your password?",
-                      style: TextStyle(
-                        color: Color(0xFF666666),
-                        fontStyle: FontStyle.normal,
-                      ),
-                      textAlign: TextAlign.end,
-                    ),
-                  ),
+                      width: double.infinity,
+                      child: Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.info_outline,
+                            color: Color(0xFF666666),
+                            size: 17,
+                          ),
+                          Text(
+                            " Leave empty if you don't have Invitation Code",
+                            style: TextStyle(
+                              color: Color(0xFF666666),
+                              fontStyle: FontStyle.normal,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      )),
                   const SizedBox(
                     height: 15,
                   ),
@@ -122,10 +179,9 @@ class AppSignIn extends StatelessWidget {
                     decoration: const BoxDecoration(
                         shape: BoxShape.circle, color: Color(0xFFF2F3F7)),
                     child: ElevatedButton(
-                      //padding: EdgeInsets.all(17.0),
                       onPressed: () {},
                       child: const Text(
-                        "Sign In",
+                        "Sign Up",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,
@@ -150,20 +206,20 @@ class AppSignIn extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     const Text(
-                      "Don't have an account? ",
+                      "Already have an account? ",
                       style: TextStyle(
                         color: Color(0xFF666666),
                         fontStyle: FontStyle.normal,
                       ),
                     ),
                     InkWell(
-                      onTap: () => {
+                      onTap: () {
                         kIsWeb
-                            ? context.goNamed(MyRoutes.register)
-                            : context.pushNamed(MyRoutes.register)
+                            ? context.goNamed(MyRoutes.login)
+                            : context.pushNamed(MyRoutes.login);
                       },
                       child: const Text(
-                        "Sign Up",
+                        "Sign In",
                         style: TextStyle(
                           color: Color(0xFFAC252B),
                           fontStyle: FontStyle.normal,
@@ -179,5 +235,4 @@ class AppSignIn extends StatelessWidget {
       ),
     );
   }
-}
 }
