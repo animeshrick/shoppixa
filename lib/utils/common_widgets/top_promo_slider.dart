@@ -10,7 +10,7 @@ class TopPromoSlider extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 10),
       child: SizedBox(
         height: 150.0,
-        width: double.infinity,
+        width: MediaQuery.sizeOf(context).width,
         child: CarouselSlider(
           items: [
             Image.network(
@@ -21,7 +21,7 @@ class TopPromoSlider extends StatelessWidget {
                 'https://www.bigbasket.com/media/uploads/banner_images/hp_m_health_suppliment_250923_400.jpg?tr=w-1920,q=80'),
           ],
           options: CarouselOptions(
-            aspectRatio: 16 / 9,
+            aspectRatio: 0.1,
             initialPage: 0,
             enableInfiniteScroll: true,
             autoPlay: true,
@@ -29,7 +29,6 @@ class TopPromoSlider extends StatelessWidget {
             autoPlayAnimationDuration: const Duration(milliseconds: 800),
             autoPlayCurve: Curves.fastOutSlowIn,
             enlargeCenterPage: true,
-            enlargeFactor: 0.1,
             scrollDirection: Axis.horizontal,
           ),
         ),

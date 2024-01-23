@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shoppixa/utils/common_widgets/auto_scroll_text.dart';
 import 'package:shoppixa/utils/routes/route_names.dart';
 
 import '../../firebase/notification/notification_service.dart';
@@ -35,13 +37,18 @@ class _HomeState extends State<Home> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: const CircleAvatar(
-              radius: 12,
-              backgroundColor: Colors.white,
-              child: Icon(
-                Icons.account_circle,
-                color: Colors.black54,
-              )),
+          backgroundColor: const Color(0xff1B6392),
+          // backgroundColor: Color(0xfc9164d),
+          /*leading: Icon(
+            Icons.account_circle,
+            color: Colors.white,
+          ),*/
+          leading: SvgPicture.asset(
+              "assets/logo/logo.svg",
+            height: 100,
+            width: 100,
+          ),
+          // leading: Image.asset("assets/logo/app_logo.svg"),
           actions: [
             IconButton(
                 onPressed: () {
@@ -49,14 +56,14 @@ class _HomeState extends State<Home> {
                       ? context.goNamed(MyRoutes.login)
                       : context.pushNamed(MyRoutes.login);
                 },
-                icon: const Icon(Icons.shopping_cart))
+                icon: const Icon(Icons.shopping_cart,color: Colors.white,))
           ],
         ),
-        /*drawer: Drawer(),*/
         body: Column(
           children: <Widget>[
+            const AutoScrollText(),
             const SearchWidget(),
-            TopPromoSlider(),
+            const TopPromoSlider(),
             PopularMenu(),
           ],
         ),

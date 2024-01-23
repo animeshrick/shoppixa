@@ -6,25 +6,25 @@ class SearchWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
       child: Theme(
           data: Theme.of(context).copyWith(
             primaryColor: Colors.grey[600],
           ),
-          child: TextField(
+          child: const TextField(
             enabled: false,
             decoration: InputDecoration(
-              border: const OutlineInputBorder(
+              border: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 borderSide: BorderSide(
-                  width: 0,
-                  style: BorderStyle.none,
+                  width: 0.5,
+                  style: BorderStyle.solid,
                 ),
               ),
               filled: true,
-              prefixIcon: const Icon(Icons.search),
-              fillColor: const Color(0xFFF2F4F5),
-              hintStyle: TextStyle(color: Colors.grey[600]),
+              prefixIcon: Icon(Icons.search,color: Color(0xff1B6392),),
+              fillColor: Color(0xFFF2F4F5),
+              hintStyle: TextStyle(color: Color(0xff1B6392)),
               hintText: "What would your like to buy?",
             ),
             autofocus: false,
