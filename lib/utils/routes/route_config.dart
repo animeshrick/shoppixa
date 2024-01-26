@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shoppixa/screens/auth/login.dart';
 import 'package:shoppixa/screens/auth/register.dart';
 import 'package:shoppixa/screens/home/home.dart';
+import 'package:shoppixa/screens/super_pdf/super_pdf.dart';
 import 'package:shoppixa/utils/routes/route_names.dart';
 
 import '../../screens/notification_view/notification_screen.dart';
@@ -31,14 +32,22 @@ class RouteConfig {
         path: MyRoutes.login,
         name: MyRoutes.login,
         builder: (_, GoRouterState state) {
-          return AppSignIn();
+          return const AppSignIn();
         },
       ),
       GoRoute(
         path: MyRoutes.register,
         name: MyRoutes.register,
         builder: (_, GoRouterState state) {
-          return AppSingUp();
+          return const AppSingUp();
+        },
+      ),
+      GoRoute(
+        path: MyRoutes.superPdf,
+        name: MyRoutes.superPdf,
+        builder: (_, GoRouterState state) {
+          AppLog.i('message ${state.error}');
+          return const SuperPdf();
         },
       ),
     ],

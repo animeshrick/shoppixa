@@ -43,10 +43,18 @@ class _HomeState extends State<Home> {
             Icons.account_circle,
             color: Colors.white,
           ),*/
-          leading: SvgPicture.asset(
-              "assets/logo/logo.svg",
-            height: 100,
-            width: 100,
+          leading: GestureDetector(
+            onTap: (){
+              /*kIsWeb
+                  ? context.goNamed(MyRoutes.superPdf)
+                  : context.pushNamed(MyRoutes.superPdf);*/
+              context.goNamed(MyRoutes.superPdf);
+            },
+            child: SvgPicture.asset(
+                "assets/logo/logo.svg",
+              height: 100,
+              width: 100,
+            ),
           ),
           // leading: Image.asset("assets/logo/app_logo.svg"),
           actions: [
