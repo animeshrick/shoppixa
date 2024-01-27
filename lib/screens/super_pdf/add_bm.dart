@@ -35,7 +35,7 @@ class AddBookmarkPdf {
     document.dispose();
     //Save the file and launch/download.
     if (kIsWeb) {
-      SaveFileWeb.saveAndLaunchFileWeb(bytes, 'output.pdf');
+      SaveFileWeb.saveAndLaunchFileWeb(bytes, 'output_web.pdf');
     } else {
       SaveFile.saveAndLaunchFile(bytes, 'output.pdf');
     }

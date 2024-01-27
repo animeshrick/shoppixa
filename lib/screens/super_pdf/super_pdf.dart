@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shoppixa/screens/super_pdf/add_bm.dart';
 
-class SuperPdf extends StatefulWidget {
+class SuperPdf extends StatelessWidget {
   const SuperPdf({super.key});
 
-  @override
-  State<SuperPdf> createState() => _SuperPdfState();
-}
-
-class _SuperPdfState extends State<SuperPdf> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

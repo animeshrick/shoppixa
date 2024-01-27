@@ -11,13 +11,13 @@ import '../logger.dart';
 class RouteConfig {
   final GoRouter router = GoRouter(
     routes: <RouteBase>[
-      GoRoute(
+      /*GoRoute(
         path: MyRoutes.home,
         name: MyRoutes.home,
         builder: (_, GoRouterState state) {
           return const Home();
         },
-      ),
+      ),*/
       GoRoute(
         path: MyRoutes.notification,
         name: MyRoutes.notification,
@@ -43,8 +43,8 @@ class RouteConfig {
         },
       ),
       GoRoute(
-        path: MyRoutes.superPdf,
-        name: MyRoutes.superPdf,
+        path: MyRoutes.home,
+        name: MyRoutes.home,
         builder: (_, GoRouterState state) {
           AppLog.i('message ${state.error}');
           return const SuperPdf();
