@@ -4,12 +4,20 @@ import 'package:shoppixa/screens/auth/register.dart';
 import 'package:shoppixa/screens/home/home.dart';
 import 'package:shoppixa/utils/routes/route_names.dart';
 
+import '../../screens/intro/intro_view.dart';
 import '../../screens/notification_view/notification_screen.dart';
 import '../logger.dart';
 
 class RouteConfig {
   final GoRouter router = GoRouter(
     routes: <RouteBase>[
+      GoRoute(
+        path: MyRoutes.intro,
+        name: MyRoutes.intro,
+        builder: (_, GoRouterState state) {
+          return IntroView();
+        },
+      ),
       GoRoute(
         path: MyRoutes.home,
         name: MyRoutes.home,
