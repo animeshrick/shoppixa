@@ -8,11 +8,11 @@ class NavigationService {
 
 class CurrentContext {
   BuildContext context = kIsWeb
-      ? RouteConfig().router.routerDelegate.navigatorKey.currentContext!
+      ? RouteConfig.instance.router.routerDelegate.navigatorKey.currentContext!
       : NavigationService.navigatorKey.currentContext!;
 
   String? currentPath = kIsWeb
-      ? RouteConfig().router.routeInformationProvider.value.location
+      ? RouteConfig.instance.router.routeInformationProvider.value.location
       : ModalRoute.of(NavigationService.navigatorKey.currentContext!)
           ?.settings
           .name;

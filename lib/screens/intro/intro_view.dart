@@ -96,9 +96,9 @@ class _IntroViewState extends State<IntroView> with TickerProviderStateMixin {
                           child: GestureDetector(
                             onTap: () {
                               if (kIsWeb) {
-                                context.goNamed(MyRoutes.home);
+                                context.pushReplacementNamed(MyRoutes.home);
                               } else {
-                                context.pushNamed(MyRoutes.home);
+                                context.pushReplacementNamed(MyRoutes.home);
                               }
                             },
                             child: Container(

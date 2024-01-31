@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shoppixa/screens/home/common_widgets/top_selling/top_selling.dart';
 import 'package:shoppixa/utils/custom_buttons/custom_icon_button.dart';
+import 'package:shoppixa/utils/redirect_engine/redirect_engine.dart';
+import 'package:shoppixa/utils/routes/route_names.dart';
 
 import '../../firebase/notification/notification_service.dart';
 import 'common_widgets/items_in_cart/item_in_cart.dart';
@@ -60,7 +62,10 @@ class _HomeState extends State<Home> {
                 iconColor: const Color(0xff1B6392),
                 icon: Icons.shopping_cart_outlined),
             customIconButton(
-                onPressed: () {},
+                onPressed: () {
+                  RedirectEngine().redirectRoutes(
+                      redirectUrl: Uri.parse(MyRoutes.superPdf));
+                },
                 iconColor: const Color(0xff1B6392),
                 icon: Icons.notifications_active_outlined),
           ],

@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shoppixa/screens/auth/login.dart';
 import 'package:shoppixa/screens/auth/register.dart';
 import 'package:shoppixa/screens/home/home.dart';
+import 'package:shoppixa/screens/super_pdf/super_pdf.dart';
 import 'package:shoppixa/utils/routes/route_names.dart';
 
 import '../../screens/intro/intro_view.dart';
@@ -9,6 +10,15 @@ import '../../screens/notification_view/notification_screen.dart';
 import '../logger.dart';
 
 class RouteConfig {
+  static RouteConfig? _instance;
+
+  RouteConfig._privateConstructor();
+
+  static RouteConfig get instance {
+    _instance ??= RouteConfig._privateConstructor();
+    return _instance!;
+  }
+
   final GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
@@ -49,6 +59,15 @@ class RouteConfig {
           return AppSingUp();
         },
       ),
+      GoRoute(
+        path: MyRoutes.superPdf,
+        name: MyRoutes.superPdf,
+        builder: (_, GoRouterState state) {
+          return SuperPdf();
+        },
+      ),
     ],
   );
 }
+
+// RouteConfig routeConfig = RouteConfig();
