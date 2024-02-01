@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shoppixa/utils/app_color.dart';
+import 'package:shoppixa/utils/constants/app_color.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key});

@@ -4,6 +4,8 @@ import 'package:shoppixa/utils/custom_text.dart';
 class PopularMenu extends StatelessWidget {
   double? width, height = 55.0;
 
+  PopularMenu({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -85,7 +87,7 @@ class PopularMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              customText('All Categories', Colors.black54, 13),
+              customText('More Categories', Colors.black54, 13),
             ],
           )
         ],

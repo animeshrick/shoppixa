@@ -63,10 +63,14 @@ dependencies:
   connectivity_plus: ^5.0.2
   page_transition: ^2.1.0
   animate_do: ^3.3.1
+  bottom_navy_bar: ^6.0.0
 
   syncfusion_flutter_pdf: ^24.1.47
   open_file: ^3.3.2
   universal_html: ^2.2.4
+
+  # DATE-TIME FORMATTER
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:

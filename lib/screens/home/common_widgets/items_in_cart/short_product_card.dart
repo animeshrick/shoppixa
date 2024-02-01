@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:shoppixa/utils/constants/app_english_text.dart';
+import 'package:shoppixa/utils/custom_buttons/custom_out_line_btn.dart';
 
-import '../../../../utils/constants/app_english_text.dart';
 import '../../../../utils/custom_text.dart';
 import '../product_model.dart';
 
-class TopHeaderItem extends StatelessWidget {
+class ShortProductCard extends StatelessWidget {
   final Product product;
 
-  const TopHeaderItem({Key? key, required this.product}) : super(key: key);
+  const ShortProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -32,22 +33,23 @@ class TopHeaderItem extends StatelessWidget {
             children: [
               customText(product.name, Colors.black, 16,
                   fontWeight: FontWeight.w500),
-              SizedBox(
-                  width: 200,
-                  child: customOverflowText(
-                      product.description, Colors.grey, 14,
-                      maxLines: 2, textAlign: TextAlign.center)),
               const SizedBox(height: 5),
               Row(
                 children: [
                   customText("${AppEnglishText().rupee}${product.ofrPrice}",
-                      Colors.green, 30),
+                      Colors.green, 20),
                   const SizedBox(width: 3),
                   customText("${AppEnglishText().rupee}${product.mrp}",
-                      Colors.grey, 20,
+                      Colors.grey, 14,
                       lineThrough: true),
                 ],
               ),
+              CustomOutLineBtn(
+                  onPressed: () {},
+                  btnText: "Remove Item",
+                  borderColor: Colors.red,
+                  btnSize: MediaQuery.sizeOf(context).width * 0.49,
+                  btnHeight: 35),
             ],
           ),
         ),

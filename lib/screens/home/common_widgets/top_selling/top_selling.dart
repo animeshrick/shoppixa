@@ -6,19 +6,16 @@ import '../product_model.dart';
 
 class TopSelling extends StatelessWidget {
   final List<Product> products = [
-    Product('iPhone', 'Buy iPhone 15', 'assets/logo/intro.jpg'),
+    Product(
+        'iPhone 15', 'Buy iPhone 15', 'assets/logo/intro.jpg', "1500", "150"),
     Product('Apple Macbook M2', 'Buy 13-inch MacBook Air with M2 Chip',
-        'assets/logo/intro.jpg'),
+        'assets/logo/intro.jpg', "14991", "1750"),
     Product('Smart Watch', 'Smart Watches - Up to 70% Off - Buy Premium',
-        'assets/logo/intro.jpg'),
+        'assets/logo/intro.jpg', "1000", "250"),
     Product('Water Purifier', 'Buy Best Water Purifier | Water Filter For Home',
-        'assets/logo/intro.jpg'),
-    Product(
-        'Men Jens', 'Buy Men Jens online in India', 'assets/logo/intro.jpg'),
-    Product(
-        'Woman Winter Wear',
-        'Buy Winter Wear Clothing for Women Online in India - ONLY',
-        'assets/logo/intro.jpg'),
+        'assets/logo/intro.jpg', "500", "450"),
+    Product('Woman Ware', 'Buy Best quality product', 'assets/logo/intro.jpg',
+        "500", "50"),
   ];
 
   @override
@@ -32,7 +29,7 @@ class TopSelling extends StatelessWidget {
             headerOnTap: () {},
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.4,
+            height: MediaQuery.of(context).size.height * 0.3,
             child: ListView.separated(
                 shrinkWrap: true,
                 primary: false,
