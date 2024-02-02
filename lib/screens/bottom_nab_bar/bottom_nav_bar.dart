@@ -1,10 +1,18 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoppixa/screens/cart/cart_view.dart';
+import 'package:shoppixa/screens/choose_location/choose_location.dart';
 import 'package:shoppixa/screens/home/home.dart';
 import 'package:shoppixa/screens/more_options/more_options.dart';
 import 'package:shoppixa/screens/profile/user_profile.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
+import 'package:shoppixa/utils/custom_text.dart';
+import 'package:shoppixa/utils/logger.dart';
+import 'package:shoppixa/utils/redirect_engine/redirect_engine.dart';
+import 'package:shoppixa/utils/routes/route_names.dart';
 
 class BottomNavBarView extends StatefulWidget {
   const BottomNavBarView({super.key});
@@ -22,12 +30,6 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
     UserProfile(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,24 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
           width: 500,
         ),
         actions: [
+          Row(
+            children: [
+              customUnderlineText("700105", appBaseColor, 16),
+              IconButton(
+                icon: Icon(Icons.gps_fixed_outlined),
+                onPressed: () async {
+                  // RedirectEngine().redirectRoutes(redirectUrl: Uri.parse(MyRoutes.myLocation));
+                  /*kIsWeb
+                      ? context.goNamed(MyRoutes.myLocation)
+                      : context.pushNamed(MyRoutes.myLocation);*/
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ChooseLocation()),
+                  );
+                },
+              ),
+            ],
+          ),
           IconButton(
             icon: const Badge(
                 padding: EdgeInsets.only(left: 10),

@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:shoppixa/screens/auth/login.dart';
 import 'package:shoppixa/screens/auth/register.dart';
+import 'package:shoppixa/screens/choose_location/choose_location.dart';
 import 'package:shoppixa/screens/super_pdf/super_pdf.dart';
 import 'package:shoppixa/utils/routes/route_names.dart';
 
@@ -61,6 +62,13 @@ class RouteConfig {
         },
       ),
       GoRoute(
+        path: MyRoutes.myLocation,
+        name: MyRoutes.myLocation,
+        builder: (_, GoRouterState state) {
+          return ChooseLocation();
+        },
+      ),
+      GoRoute(
         path: MyRoutes.superPdf,
         name: MyRoutes.superPdf,
         builder: (_, GoRouterState state) {
@@ -70,5 +78,3 @@ class RouteConfig {
     ],
   );
 }
-
-// RouteConfig routeConfig = RouteConfig();
