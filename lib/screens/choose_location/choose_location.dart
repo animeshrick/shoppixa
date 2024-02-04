@@ -100,7 +100,7 @@ class ChooseLocation extends StatelessWidget {
                       onTap: () async {
                         // await CustomUrlLaunch.launchUrl(
                         //     "https://www.google.com/maps/search/?api=1&query=22.5905509,88.4318821");
-                        completeLocationForm(context);
+                        completeLocationForm(context,locationVmValue: locationVm);
                       }),
                 ),
               ],

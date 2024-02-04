@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:shoppixa/resources/local_storeage/save_pincode/saved_pincode_sp.dart';
 import 'package:shoppixa/utils/text_utils.dart';
 
 import '../../../utils/logger.dart';
@@ -13,7 +14,10 @@ class LocationVm with ChangeNotifier {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await handleLocationPermission(context).then((value) async {
         await getCurrentPosition(context).then((value) async {
-          await getAddressFromLatLng();
+          await getAddressFromLatLng().whenComplete(() {
+            pincode =
+                TextEditingController(text: currentPlace?.postalCode ?? "");
+          });
         });
       });
     });
@@ -27,6 +31,7 @@ class LocationVm with ChangeNotifier {
 
   String? currentAddress;
   Position? currentPosition;
+  Placemark? currentPlace;
 
   CameraPosition initialCameraPos = const CameraPosition(
     target: LatLng(28.7041, 77.1025),
@@ -115,11 +120,38 @@ class LocationVm with ChangeNotifier {
       Placemark place = placemarks[0];
       currentAddress =
           '${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode}';
+      currentPlace = place;
       AppLog.i(
           'Readable Add --- ${place.street}, ${place.subLocality}, ${place.subAdministrativeArea}, ${place.postalCode} ');
       notifyListeners();
     }).catchError((e) {
       AppLog.e('Error: $e');
     });
+  }
+
+  final formKey = GlobalKey<FormState>();
+
+  TextEditingController add1 = TextEditingController();
+  TextEditingController add2 = TextEditingController();
+  TextEditingController landmark = TextEditingController();
+  TextEditingController pincode = TextEditingController();
+
+  void clearFormOut(BuildContext context) {
+    add1.clear();
+    add2.clear();
+    landmark.clear();
+    pincode.clear();
+    Navigator.pop(context);
+    notifyListeners();
+  }
+
+  void validateFullForm() {
+    final isValid = formKey.currentState?.validate();
+
+    if (!(isValid!)) {
+      return;
+    }
+    SavedPinCodeSp().savePinCode(pincode.text);
+    // formKey.currentState?.save();
   }
 }
