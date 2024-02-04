@@ -25,11 +25,11 @@ class LocationVm with ChangeNotifier {
     });
   }
 
-  @override
-  void dispose() {
-    googleMapController?.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   googleMapController?.dispose();
+  //   super.dispose();
+  // }
 
   String? currentAddress;
   Position? currentPosition;

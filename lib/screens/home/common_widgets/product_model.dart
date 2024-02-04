@@ -3,6 +3,7 @@ class Product {
   final String description;
   final String imageUrl;
   final String mrp, ofrPrice;
+  final bool isFavourite;
 
-  Product(this.name, this.description, this.imageUrl, this.mrp, this.ofrPrice);
+  Product(this.name, this.description, this.imageUrl, this.mrp, this.ofrPrice, this.isFavourite);
 }

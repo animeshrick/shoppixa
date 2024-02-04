@@ -9,13 +9,13 @@ class ItemsInCart extends StatelessWidget {
 
   final List<Product> products = [
     Product(
-        'iPhone 15', 'Buy iPhone 15', 'assets/logo/intro.jpg', "1500", "150"),
+        'iPhone 15', 'Buy iPhone 15', 'assets/logo/intro.jpg', "1500", "150",false),
     Product('Apple Macbook M2', 'Buy 13-inch MacBook Air with M2 Chip',
-        'assets/logo/intro.jpg', "14991", "1750"),
+        'assets/logo/intro.jpg', "14991", "1750",false),
     Product('Smart Watch', 'Smart Watches - Up to 70% Off - Buy Premium',
-        'assets/logo/intro.jpg', "1000", "250"),
+        'assets/logo/intro.jpg', "1000", "250",false),
     Product('Water Purifier', 'Buy Best Water Purifier | Water Filter For Home',
-        'assets/logo/intro.jpg', "500", "450"),
+        'assets/logo/intro.jpg', "500", "450",false),
   ];
 
   @override

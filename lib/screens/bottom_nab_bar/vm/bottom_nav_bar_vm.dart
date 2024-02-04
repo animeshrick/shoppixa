@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:shoppixa/resources/local_storeage/save_pincode/saved_pincode_sp.dart';
+import 'package:shoppixa/screens/wishlist/wishlist.dart';
 import 'package:shoppixa/utils/logger.dart';
 
 import '../../cart/cart_view.dart';
 import '../../home/home.dart';
-import '../../more_options/more_options.dart';
 import '../../profile/user_profile.dart';
 
 class BottomNavBarVm with ChangeNotifier {
@@ -29,7 +29,7 @@ class BottomNavBarVm with ChangeNotifier {
    List<Widget> widgetOptions = <Widget>[
     const Home(),
     const CartView(),
-    const MoreOptions(),
+    const Wishlist(),
     const UserProfile(),
   ];
 
