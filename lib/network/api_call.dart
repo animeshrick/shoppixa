@@ -48,9 +48,13 @@ class ApiBaseHelper {
   // Add more methods for different HTTP methods as needed
 
   // Example method for making a custom request
-  Future<Response> customRequest(String method, String endpoint, {dynamic data, Map<String, dynamic>? params}) async {
+  Future<Response> customRequest(String method, String endpoint,
+      {dynamic data, Map<String, dynamic>? params}) async {
     try {
-      final response = await _dio.request(endpoint, data: data, queryParameters: params, options: Options(method: method));
+      final response = await _dio.request(endpoint,
+          data: data,
+          queryParameters: params,
+          options: Options(method: method));
       return response;
     } catch (e) {
       throw Exception(e.toString());

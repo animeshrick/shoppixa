@@ -13,6 +13,12 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="shoppixa">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBpQc6BvPy3lLsevljPyND2sq1gmzlyDTg" />
+        <!--AIzaSyDTXdFO4Rd_f-gT_YjZa1npQZiiwiRwztE-->
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
