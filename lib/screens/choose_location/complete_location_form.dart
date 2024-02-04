@@ -101,9 +101,7 @@ completeLocationForm(BuildContext context,
                       btnColor: appBaseColor,
                       buttonText: "Proceed",
                       onPressed: () {
-                        locationVmValue.validateFullForm();
-                        // SavedPinCodeSp().savePinCode('700105');
-                        // context.pushReplacementNamed(MyRoutes.home);
+                        locationVmValue.validateFullForm(context);
                       },
                       buttonTextSize: 14),
                 ],

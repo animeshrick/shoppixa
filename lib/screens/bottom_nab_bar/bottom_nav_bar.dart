@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:shoppixa/screens/bottom_nab_bar/bottom_nav_bar_vm.dart';
+import 'package:shoppixa/screens/bottom_nab_bar/vm/bottom_nav_bar_vm.dart';
 import 'package:shoppixa/screens/cart/cart_view.dart';
 import 'package:shoppixa/screens/choose_location/choose_location.dart';
 import 'package:shoppixa/screens/home/home.dart';
@@ -9,6 +11,8 @@ import 'package:shoppixa/screens/more_options/more_options.dart';
 import 'package:shoppixa/screens/profile/user_profile.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/custom_text.dart';
+
+import '../../utils/routes/route_names.dart';
 
 class BottomNavBarView extends StatefulWidget {
   const BottomNavBarView({super.key});
@@ -18,21 +22,13 @@ class BottomNavBarView extends StatefulWidget {
 }
 
 class _BottomNavBarViewState extends State<BottomNavBarView> {
-  int _selectedIndex = 0;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    CartView(),
-    MoreOptions(),
-    UserProfile(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
       value: BottomNavBarVm(),
       child: Consumer<BottomNavBarVm>(builder: (context, bottomNavBm, __) {
         return Scaffold(
-          appBar: AppBar(
+          appBar: bottomNavBm.selectedIndex ==1 ? null: AppBar(
             backgroundColor: const Color(0xffffffff),
             // backgroundColor: const Color(0xff1B6392),
             leading: SvgPicture.asset(
@@ -48,14 +44,14 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
                     icon: Icon(Icons.fmd_good_outlined),
                     onPressed: () async {
                       // RedirectEngine().redirectRoutes(redirectUrl: Uri.parse(MyRoutes.myLocation));
-                      /*kIsWeb
+                      kIsWeb
                             ? context.goNamed(MyRoutes.myLocation)
-                            : context.pushNamed(MyRoutes.myLocation);*/
-                      Navigator.push(
+                            : context.pushNamed(MyRoutes.myLocation);
+                     /* Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ChooseLocation()),
-                      );
+                      );*/
                     },
                   ),
                 ],
@@ -69,16 +65,15 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
             ],
           ),
           body: Center(
-            child: _widgetOptions.elementAt(_selectedIndex),
+            child:
+                bottomNavBm.widgetOptions.elementAt(bottomNavBm.selectedIndex),
           ),
           bottomNavigationBar: NavigationBar(
             onDestinationSelected: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
+              bottomNavBm.setSelectedIndex(index);
             },
             indicatorColor: appBaseColor,
-            selectedIndex: _selectedIndex,
+            selectedIndex: bottomNavBm.selectedIndex,
             destinations: const <Widget>[
               NavigationDestination(
                 selectedIcon: Icon(Icons.home, color: Colors.white),

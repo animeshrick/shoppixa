@@ -3,11 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shoppixa/resources/local_storeage/save_pincode/saved_pincode_sp.dart';
 import 'package:shoppixa/utils/text_utils.dart';
 
 import '../../../utils/logger.dart';
+import '../../../utils/routes/route_names.dart';
 
 class LocationVm with ChangeNotifier {
   LocationVm(BuildContext context) {
@@ -145,13 +147,13 @@ class LocationVm with ChangeNotifier {
     notifyListeners();
   }
 
-  void validateFullForm() {
+  void validateFullForm(BuildContext context) {
     final isValid = formKey.currentState?.validate();
 
     if (!(isValid!)) {
       return;
     }
     SavedPinCodeSp().savePinCode(pincode.text);
-    // formKey.currentState?.save();
+    context.pushReplacementNamed(MyRoutes.home);
   }
 }

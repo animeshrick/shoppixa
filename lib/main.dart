@@ -3,7 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shoppixa/screens/bottom_nab_bar/bottom_nav_bar_vm.dart';
+import 'package:shoppixa/screens/bottom_nab_bar/vm/bottom_nav_bar_vm.dart';
 import 'package:shoppixa/utils/routes/route_config.dart';
 import 'package:url_strategy/url_strategy.dart';
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shoppixa/screens/cart/cart_bottom_bar.dart';
 import 'package:shoppixa/screens/cart/cart_item.dart';
+import 'package:shoppixa/screens/cart/deliverable_address.dart';
 
+import '../../utils/custom_text.dart';
 import '../home/common_widgets/product_model.dart';
 
 class CartView extends StatefulWidget {
@@ -26,23 +28,34 @@ class _CartViewState extends State<CartView> {
         "500",
         "450"),
     Product('Men Jeans', '', 'assets/logo/intro.jpg', "5500", "2500"),
+    Product('Men Jeans', '', 'assets/logo/intro.jpg', "5500", "2500"),
+    Product('Men Jeans', '', 'assets/logo/intro.jpg', "5500", "2500"),
+    Product('Men Jeans', '', 'assets/logo/intro.jpg', "5500", "2500"),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-                itemCount: products.length,
-                itemBuilder: (_, int i) {
-                  Product product = products.elementAt(i);
-                  return CartItem(product: product);
-                }),
-          ),
-          CartBottomBar(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            customText("My Cart", Colors.black, 22,
+                fontWeight: FontWeight.w500),
+            SizedBox(height: 10,),
+            DeliverableAddress(),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: (_, int i) {
+                    Product product = products.elementAt(i);
+                    return CartItem(product: product);
+                  }),
+            ),
+            CartBottomBar(),
+          ],
+        ),
       ),
     );
   }
