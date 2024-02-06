@@ -9,31 +9,27 @@ class CartBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 15, left: 10, right: 10),
-      // padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            "Total",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
-          ),
-          Row(
-            children: [
-              customText("${AppEnglishText().rupee}5000", appBaseColor, 25,
-                  fontWeight: FontWeight.w900),
-              IconButton(
-                  onPressed: () {},
-                  padding: EdgeInsets.zero,
-                  icon: const Icon(
-                    Icons.more_vert,
-                    size: 14,
-                  )),
-            ],
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        const Text(
+          "Total",
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+        ),
+        Row(
+          children: [
+            customText("${AppEnglishText().rupee}5000", appBaseColor, 25,
+                fontWeight: FontWeight.w900),
+            IconButton(
+                onPressed: () {},
+                padding: EdgeInsets.zero,
+                icon: const Icon(
+                  Icons.more_vert,
+                  size: 14,
+                )),
+          ],
+        ),
+      ],
     );
   }
 }

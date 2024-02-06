@@ -5,4 +5,5 @@ class MyRoutes {
   static const String register = "/register";
   static const String notification = "/notification";
   static const String superPdf = "/superpdf ";
+  static const String myLocation = "/myLocation ";
 }
