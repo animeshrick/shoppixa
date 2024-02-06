@@ -18,8 +18,8 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
   static const List<Widget> _widgetOptions = <Widget>[
     Home(),
     CartView(),
-    MoreOptions(),
     UserProfile(),
+    MoreOptions(),
   ];
 
   void _onItemTapped(int index) {

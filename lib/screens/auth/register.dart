@@ -1,6 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shoppixa/utils/constants/app_color.dart';
+import 'package:shoppixa/utils/custom_buttons/custom_elevated_btn.dart';
+import 'package:shoppixa/utils/custom_text_field.dart';
+import 'package:shoppixa/utils/extension/extended_sizedbox.dart';
 
 import '../../utils/routes/route_names.dart';
 
@@ -11,31 +15,29 @@ class AppSingUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          padding:
-              const EdgeInsets.only(left: 20, right: 20, top: 35, bottom: 30),
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.white70,
-          child: Column(
-            children: <Widget>[
-              Flexible(
-                flex: 1,
-                child: InkWell(
-                  child: const Align(
-                    alignment: Alignment.topLeft,
-                    child: Icon(Icons.close),
+        body: SingleChildScrollView(
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Container(
+            padding: const EdgeInsets.only(left: 15, right: 15, top: 35),
+            color: Colors.white70,
+            child: Column(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: Colors.black12,
+                    child: InkWell(
+                      child: const Icon(Icons.close, color: Colors.white),
+                      onTap: () {
+                        kIsWeb
+                            ? context.goNamed(MyRoutes.home)
+                            : context.pushNamed(MyRoutes.home);
+                      },
+                    ),
                   ),
-                  onTap: () {
-                    kIsWeb
-                        ? context.goNamed(MyRoutes.home)
-                        : context.pushNamed(MyRoutes.home);
-                  },
                 ),
-              ),
-              Flexible(
-                flex: 5,
-                child: Column(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
@@ -47,160 +49,83 @@ class AppSingUp extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Row(
+                    Row(
                       children: <Widget>[
                         Flexible(
-                          flex: 1,
-                          child: TextField(
-                            showCursor: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                ),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFFF2F3F5),
-                              hintStyle: TextStyle(
-                                color: Color(0xFF666666),
-                              ),
+                            flex: 1,
+                            child: customTextField(
+                              isNeedDesign: true,
+                              isAutoFocus: true,
+                              controller: null,
                               hintText: "First Name",
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
+                              labelText: "First Name",
+                            )),
+                        10.pw,
                         Flexible(
-                          flex: 1,
-                          child: TextField(
-                            showCursor: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0)),
-                                borderSide: BorderSide(
-                                  width: 0,
-                                  style: BorderStyle.none,
-                                ),
-                              ),
-                              filled: true,
-                              fillColor: Color(0xFFF2F3F5),
-                              hintStyle: TextStyle(
-                                color: Color(0xFF666666),
-                              ),
-                              hintText: "Last Name",
-                            ),
-                          ),
-                        ),
+                            flex: 1,
+                            child: customTextField(
+                                isNeedDesign: true,
+                                controller: null,
+                                hintText: "Last Name",
+                                labelText: "Last Name")),
                       ],
                     ),
-                    const SizedBox(
-                      height: 15,
+                    15.ph,
+                    customTextField(
+                      isNeedDesign: true,
+                      controller: null,
+                      prefixIcon:
+                          const Icon(Icons.phone_outlined, color: appBaseColor),
+                      hintText: "Phone Number",
+                      labelText: "Phone Number",
+                      keyboardType: TextInputType.phone,
                     ),
-                    const TextField(
-                      showCursor: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          ),
-                        ),
-                        filled: true,
-                        prefixIcon: Icon(
-                          Icons.phone,
-                          color: Color(0xFF666666),
-                          size: 17,
-                        ),
-                        fillColor: Color(0xFFF2F3F5),
-                        hintStyle: TextStyle(
-                          color: Color(0xFF666666),
-                        ),
-                        hintText: "Phone Number",
-                      ),
+                    15.ph,
+                    customTextField(
+                      isNeedDesign: true,
+                      controller: null,
+                      hintText: "Email ID",
+                      labelText: "Email ID",
+                      keyboardType: TextInputType.emailAddress,
+                      prefixIcon: const Icon(Icons.alternate_email,
+                          color: appBaseColor),
                     ),
-                    const SizedBox(
-                      height: 15,
+                    15.ph,
+                    customTextField(
+                      isNeedDesign: true,
+                      controller: null,
+                      hintText: "Password",
+                      labelText: "Password",
+                      obscureText: true,
+                      maxLines: 1,
+                      prefixIcon:
+                          const Icon(Icons.password_sharp, color: appBaseColor),
                     ),
-                    const TextField(
-                      showCursor: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                          borderSide: BorderSide(
-                            width: 0,
-                            style: BorderStyle.none,
-                          ),
-                        ),
-                        filled: true,
-                        prefixIcon: Icon(
-                          Icons.code,
-                          color: Color(0xFF666666),
-                          size: 17,
-                        ),
-                        fillColor: Color(0xFFF2F3F5),
-                        hintStyle: TextStyle(
-                          color: Color(0xFF666666),
-                        ),
-                        hintText: "Invitation Code",
-                      ),
+                    15.ph,
+                    customTextField(
+                      isNeedDesign: true,
+                      controller: null,
+                      hintText: "Confirm Password",
+                      labelText: "Confirm Password",
+                      obscureText: true,
+                      maxLines: 1,
+                      isLast: true,
+                      prefixIcon:
+                          const Icon(Icons.password_sharp, color: appBaseColor),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const SizedBox(
+                    15.ph,
+                    customButton(
                         width: double.infinity,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.info_outline,
-                              color: Color(0xFF666666),
-                              size: 17,
-                            ),
-                            Text(
-                              " Leave empty if you don't have Invitation Code",
-                              style: TextStyle(
-                                color: Color(0xFF666666),
-                                fontStyle: FontStyle.normal,
-                              ),
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
-                        )),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle, color: Color(0xFFF2F3F7)),
-                      child: ElevatedButton(
+                        height: 42,
+                        radius: 42,
+                        btnColor: appBaseColor,
+                        buttonText: "Sign Up",
                         onPressed: () {},
-                        child: const Text(
-                          "Sign Up",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontFamily: 'Poppins-Medium.ttf',
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                        buttonTextSize: 14),
+                    10.ph,
                   ],
                 ),
-              ),
-              Flexible(
-                flex: 1,
-                child: Align(
+                Align(
                   alignment: Alignment.bottomCenter,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -222,16 +147,16 @@ class AppSingUp extends StatelessWidget {
                         child: const Text(
                           "Sign In",
                           style: TextStyle(
-                            color: Color(0xFFAC252B),
+                            color: Colors.redAccent,
                             fontStyle: FontStyle.normal,
                           ),
                         ),
                       ),
                     ],
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
