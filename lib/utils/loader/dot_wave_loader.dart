@@ -6,7 +6,7 @@ class DotWaveLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Center(
+    return Center(
       child: LoadingAnimationWidget.twistingDots(
         leftDotColor: const Color(0xFF1A1A3F),
         rightDotColor: const Color(0xFFEA3799),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shoppixa/utils/constants/app_english_text.dart';
 import 'package:shoppixa/utils/custom_text.dart';
 
@@ -68,8 +67,9 @@ class ProductCard extends StatelessWidget {
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
-                         product.isFavourite?
-                          Icons.favorite:Icons.favorite_border,
+                          product.isFavourite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
                           color: Colors.pink,
                         )),
                   ),

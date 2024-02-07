@@ -8,7 +8,7 @@ TextStyle customizeTextStyle(
     Color? decorationColor,
     double? height,
     Color? backgroundColor}) {
-  return GoogleFonts.sourceSans3(
+  return GoogleFonts.ubuntu(
       decoration: decoration,
       fontWeight: fontWeight,
       wordSpacing: 3,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shoppixa/screens/home/common_widgets/product_model.dart';
 
-import '../../utils/constants/app_color.dart';
-import '../../utils/constants/app_english_text.dart';
-import '../../utils/custom_text.dart';
+import '../../../utils/constants/app_color.dart';
+import '../../../utils/constants/app_english_text.dart';
+import '../../../utils/custom_text.dart';
 
 class CartItem extends StatelessWidget {
   final Product product;

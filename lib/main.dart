@@ -2,8 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:shoppixa/screens/bottom_nab_bar/vm/bottom_nav_bar_vm.dart';
 import 'package:shoppixa/utils/routes/route_config.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -33,6 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+
       routerConfig: RouteConfig.instance.router,
     );
   }

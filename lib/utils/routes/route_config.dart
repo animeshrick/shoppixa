@@ -6,6 +6,7 @@ import 'package:shoppixa/screens/super_pdf/super_pdf.dart';
 import 'package:shoppixa/utils/routes/route_names.dart';
 
 import '../../screens/bottom_nab_bar/bottom_nav_bar.dart';
+import '../../screens/choose_location/address.dart';
 import '../../screens/intro/intro_view.dart';
 import '../../screens/notification_view/notification_screen.dart';
 import '../logger.dart';
@@ -65,7 +66,14 @@ class RouteConfig {
         path: MyRoutes.myLocation,
         name: MyRoutes.myLocation,
         builder: (_, GoRouterState state) {
-          return ChooseLocation();
+          return Addresses();
+        },
+      ),
+      GoRoute(
+        path: MyRoutes.currentLocation,
+        name: MyRoutes.currentLocation,
+        builder: (_, GoRouterState state) {
+          return ChooseCurrentLocation();
         },
       ),
       GoRoute(

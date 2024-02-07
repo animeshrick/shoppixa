@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:shoppixa/utils/routes/navigation_context.dart';
 
 class HandlePermissions {
   // BuildContext context = CurrentContext().context;

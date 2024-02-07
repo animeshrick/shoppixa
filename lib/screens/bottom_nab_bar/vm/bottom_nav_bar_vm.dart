@@ -26,11 +26,11 @@ class BottomNavBarVm with ChangeNotifier {
   }
 
   int selectedIndex = 0;
-   List<Widget> widgetOptions = <Widget>[
+  List<Widget> widgetOptions = <Widget>[
     const Home(),
     const CartView(),
     const Wishlist(),
-    const UserProfile(),
+    UserProfile(),
   ];
 
   void setSelectedIndex(int index) {

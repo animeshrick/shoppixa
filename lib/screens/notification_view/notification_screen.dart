@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shoppixa/utils/custom_buttons/custom_back_button.dart';
 
 class NotificationScreen extends StatelessWidget {
   final Map<String, dynamic> dataFromNotification;
@@ -9,20 +10,11 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0.0,
-        titleSpacing: 10.0,
-        centerTitle: true,
-        leading: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black54,
-          ),
-        ),
-      ),
+          backgroundColor: Colors.white,
+          elevation: 0.0,
+          titleSpacing: 10.0,
+          centerTitle: true,
+          leading: CustomBackButton()),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

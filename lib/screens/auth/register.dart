@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shoppixa/utils/custom_buttons/cross_btn.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/custom_buttons/custom_elevated_btn.dart';
 import 'package:shoppixa/utils/custom_text_field.dart';
@@ -24,18 +25,7 @@ class AppSingUp extends StatelessWidget {
               children: <Widget>[
                 Align(
                   alignment: Alignment.topLeft,
-                  child: CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.black12,
-                    child: InkWell(
-                      child: const Icon(Icons.close, color: Colors.white),
-                      onTap: () {
-                        kIsWeb
-                            ? context.goNamed(MyRoutes.home)
-                            : context.pushNamed(MyRoutes.home);
-                      },
-                    ),
-                  ),
+                  child: CrossBtn(),
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/constants/app_color.dart';
-import '../../utils/constants/app_english_text.dart';
-import '../../utils/custom_text.dart';
+import '../../../utils/constants/app_color.dart';
+import '../../../utils/constants/app_english_text.dart';
+import '../../../utils/custom_text.dart';
 
 class CartBottomBar extends StatelessWidget {
   const CartBottomBar({super.key});

@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IntroScreenSp {
-
   final introScreen = 'introScreen';
 
   Future<void> init() async {

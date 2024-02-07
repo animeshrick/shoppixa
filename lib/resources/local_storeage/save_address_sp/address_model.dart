@@ -1,4 +1,4 @@
-class Address {
+class AddressModel {
   String pinCode = "";
   String city = "";
   String state = "";

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
-import 'package:shoppixa/utils/custom_buttons/custom_out_line_btn.dart';
 import 'package:shoppixa/utils/custom_buttons/custom_text_box.dart';
 import 'package:shoppixa/utils/custom_text.dart';
+
+import '../../choose_location/address.dart';
 
 class DeliverableAddress extends StatelessWidget {
   const DeliverableAddress({super.key});
@@ -48,7 +49,12 @@ class DeliverableAddress extends StatelessWidget {
             ),
             customTextButton(
               buttonText: 'Change',
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Addresses()),
+                );
+              },
               buttonTextSize: 14,
               btnColor: appBaseColor,
             ),

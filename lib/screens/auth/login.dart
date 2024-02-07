@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shoppixa/utils/custom_buttons/cross_btn.dart';
 
 import '../../utils/routes/route_names.dart';
 
@@ -19,18 +20,11 @@ class AppSignIn extends StatelessWidget {
           color: Colors.white70,
           child: Column(
             children: <Widget>[
-              Flexible(
+              const Flexible(
                 flex: 1,
-                child: InkWell(
-                  child: const Align(
-                    alignment: Alignment.topLeft,
-                    child: Icon(Icons.close),
-                  ),
-                  onTap: () {
-                    kIsWeb
-                        ? context.goNamed(MyRoutes.home)
-                        : context.pushNamed(MyRoutes.home);
-                  },
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: CrossBtn(),
                 ),
               ),
               Flexible(

@@ -16,7 +16,9 @@ class LocationVm with ChangeNotifier {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await handleLocationPermission(context).then((value) async {
         await getCurrentPosition(context).then((value) async {
-          await getAddressFromLatLng().whenComplete(() {
+          await getAddressFromLatLng(
+                  currentPosition!.latitude, currentPosition!.longitude)
+              .whenComplete(() {
             pincode =
                 TextEditingController(text: currentPlace?.postalCode ?? "");
           });
@@ -35,10 +37,8 @@ class LocationVm with ChangeNotifier {
   Position? currentPosition;
   Placemark? currentPlace;
 
-  CameraPosition initialCameraPos = const CameraPosition(
-    target: LatLng(28.7041, 77.1025),
-    zoom: 14.4746,
-  );
+  CameraPosition initialCameraPos =
+      const CameraPosition(target: LatLng(28.7041, 77.1025), zoom: 0);
 
   Completer<GoogleMapController> mapController = Completer();
 
@@ -105,7 +105,8 @@ class LocationVm with ChangeNotifier {
           position:
               LatLng(currentPosition!.latitude, currentPosition!.longitude),
         ));
-        await getAddressFromLatLng();
+        await getAddressFromLatLng(
+            currentPosition!.latitude, currentPosition!.longitude);
       } else {
         AppLog.w('its else part');
       }
@@ -115,9 +116,8 @@ class LocationVm with ChangeNotifier {
     });
   }
 
-  Future<void> getAddressFromLatLng() async {
-    await placemarkFromCoordinates(
-            currentPosition!.latitude, currentPosition!.longitude)
+  Future<void> getAddressFromLatLng(double lat, double lang) async {
+    await placemarkFromCoordinates(lat, lang)
         .then((List<Placemark> placemarks) {
       Placemark place = placemarks[0];
       currentAddress =
@@ -129,6 +129,45 @@ class LocationVm with ChangeNotifier {
     }).catchError((e) {
       AppLog.e('Error: $e');
     });
+  }
+
+  void getChangeLatLang(CameraPosition newPos) {
+    AppLog.w('new lat ${newPos.target.latitude}');
+    AppLog.w('new long ${newPos.target.longitude}');
+    double newLat = newPos.target.latitude;
+    double newLong = newPos.target.longitude;
+    googleMapController!
+        .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: LatLng(newLat, newLong),
+      zoom: 14,
+    )));
+
+    /// place current location marker
+    markers.clear();
+    markers.add(Marker(
+      markerId: MarkerId(newLat.toString()),
+      position: LatLng(newLat, newLong),
+    ));
+    notifyListeners();
+  }
+
+  void changeLocationTap(LatLng newLatLan) {
+    double newLat = newLatLan.latitude;
+    double newLong = newLatLan.longitude;
+    googleMapController!
+        .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+      target: LatLng(newLat, newLong),
+      zoom: 14,
+    )));
+
+    /// place current location marker
+    markers.clear();
+    markers.add(Marker(
+      markerId: MarkerId(newLatLan.latitude.toString()),
+      position: LatLng(newLat, newLong),
+    ));
+
+    notifyListeners();
   }
 
   final formKey = GlobalKey<FormState>();

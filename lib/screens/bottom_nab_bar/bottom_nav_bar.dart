@@ -1,17 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shoppixa/screens/bottom_nab_bar/vm/bottom_nav_bar_vm.dart';
-import 'package:shoppixa/screens/cart/cart_view.dart';
-import 'package:shoppixa/screens/choose_location/choose_location.dart';
-import 'package:shoppixa/screens/home/home.dart';
-import 'package:shoppixa/screens/profile/user_profile.dart';
+import 'package:shoppixa/screens/choose_location/address.dart';
+import 'package:shoppixa/screens/notification_view/notification_screen.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/custom_text.dart';
-
-import '../../utils/routes/route_names.dart';
 
 class BottomNavBarView extends StatefulWidget {
   const BottomNavBarView({super.key});
@@ -24,45 +18,53 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create:(_)=> BottomNavBarVm(),
+      create: (_) => BottomNavBarVm(),
       child: Consumer<BottomNavBarVm>(builder: (context, bottomNavBm, __) {
         return Scaffold(
-          appBar: bottomNavBm.selectedIndex ==1 ? null: AppBar(
-            backgroundColor: const Color(0xffffffff),
-            // backgroundColor: const Color(0xff1B6392),
-            leading: SvgPicture.asset(
-              "assets/logo/logo.svg",
-              height: 500,
-              width: 500,
-            ),
-            actions: [
-              Row(
-                children: [
-                  customUnderlineText(bottomNavBm.pinCode, appBaseColor, 16),
-                  IconButton(
-                    icon: const Icon(Icons.fmd_good_outlined),
-                    onPressed: () async {
-                      // RedirectEngine().redirectRoutes(redirectUrl: Uri.parse(MyRoutes.myLocation));
-                      /*kIsWeb
+          appBar: AppBar(
+                  backgroundColor: const Color(0xffffffff),
+                  // backgroundColor: const Color(0xff1B6392),
+                  leading: SvgPicture.asset(
+                    "assets/logo/logo.svg",
+                    height: 500,
+                    width: 500,
+                  ),
+                  actions: [
+                    Row(
+                      children: [
+                        customUnderlineText(
+                            bottomNavBm.pinCode, appBaseColor, 16),
+                        IconButton(
+                          icon: const Icon(Icons.fmd_good_outlined),
+                          onPressed: () async {
+                            // RedirectEngine().redirectRoutes(redirectUrl: Uri.parse(MyRoutes.myLocation));
+                            /*kIsWeb
                             ? context.goNamed(MyRoutes.myLocation)
                             : context.pushNamed(MyRoutes.myLocation);*/
-                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ChooseLocation()),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              IconButton(
-                icon: const Badge(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Icon(Icons.notifications_active_outlined)),
-                onPressed: () {},
-              ),
-            ],
-          ),
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Addresses()),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    IconButton(
+                      icon: const Badge(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Icon(Icons.notifications_active_outlined)),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const NotificationScreen(
+                                  dataFromNotification: {})),
+                        );
+                      },
+                    ),
+                  ],
+                ),
           body: Center(
             child:
                 bottomNavBm.widgetOptions.elementAt(bottomNavBm.selectedIndex),

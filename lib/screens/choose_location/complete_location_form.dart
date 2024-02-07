@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:shoppixa/resources/local_storeage/save_pincode/saved_pincode_sp.dart';
 import 'package:shoppixa/screens/choose_location/vm/location_vm.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/custom_buttons/custom_elevated_btn.dart';
 import 'package:shoppixa/utils/custom_text.dart';
 import 'package:shoppixa/utils/custom_text_field.dart';
-import 'package:shoppixa/utils/routes/route_names.dart';
 
 completeLocationForm(BuildContext context,
     {required LocationVm locationVmValue}) {
