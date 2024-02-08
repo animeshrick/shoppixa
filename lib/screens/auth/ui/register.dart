@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shoppixa/utils/custom_buttons/cross_btn.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
+import 'package:shoppixa/utils/custom_buttons/cross_btn.dart';
 import 'package:shoppixa/utils/custom_buttons/custom_elevated_btn.dart';
 import 'package:shoppixa/utils/custom_text_field.dart';
 import 'package:shoppixa/utils/extension/extended_sizedbox.dart';
 
-import '../../utils/routes/route_names.dart';
+import '../../../utils/routes/route_names.dart';
+import '../auth_repo/auth_repo.dart';
 
 class AppSingUp extends StatelessWidget {
   const AppSingUp({super.key});
@@ -110,7 +111,9 @@ class AppSingUp extends StatelessWidget {
                         radius: 42,
                         btnColor: appBaseColor,
                         buttonText: "Sign Up",
-                        onPressed: () {},
+                        onPressed: () async {
+                          await AuthenticationRepo().call();
+                        },
                         buttonTextSize: 14),
                     10.ph,
                   ],

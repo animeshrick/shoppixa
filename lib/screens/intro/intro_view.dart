@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shoppixa/screens/auth/register.dart';
 
 import '../../utils/routes/route_names.dart';
+import '../auth/ui/register.dart';
 
 class IntroView extends StatefulWidget {
   const IntroView({super.key});

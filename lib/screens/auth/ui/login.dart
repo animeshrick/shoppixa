@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoppixa/utils/custom_buttons/cross_btn.dart';
 
-import '../../utils/routes/route_names.dart';
+import '../../../utils/routes/route_names.dart';
 
 class AppSignIn extends StatelessWidget {
   const AppSignIn({super.key});

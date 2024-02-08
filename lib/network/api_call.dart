@@ -5,7 +5,7 @@ class ApiBaseHelper {
 
   ApiBaseHelper() {
     _dio = Dio(BaseOptions(
-      baseUrl: 'https://api.example.com',
+      baseUrl: 'https://auth-stg.onrender.com/',
       connectTimeout: Duration(seconds: 30),
       receiveTimeout: Duration(seconds: 30),
     ));
@@ -20,7 +20,7 @@ class ApiBaseHelper {
         // Handle the response globally if needed
         return handler.next(response);
       },
-      onError: (DioError e, handler) {
+      onError: (DioException e, handler) {
         // Handle errors globally if needed
         return handler.next(e);
       },
