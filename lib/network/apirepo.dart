@@ -1,7 +1,7 @@
 import 'dart:typed_data';
 
 import 'api_repo_imp.dart';
-import 'api_return_model.dart';
+import 'network_model/api_return_model.dart';
 
 abstract class ApiRepo {
   Future<ApiReturnModel?> callApi(

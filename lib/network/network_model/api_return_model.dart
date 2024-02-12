@@ -1,4 +1,4 @@
-import '../utils/logger.dart';
+import '../../utils/logger.dart';
 
 class ApiReturnModel {
   int? statusCode;

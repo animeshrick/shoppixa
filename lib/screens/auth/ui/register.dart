@@ -112,7 +112,7 @@ class AppSingUp extends StatelessWidget {
                         btnColor: appBaseColor,
                         buttonText: "Sign Up",
                         onPressed: () async {
-                          await AuthenticationRepo().call();
+                          // await AuthenticationRepo().call();
                         },
                         buttonTextSize: 14),
                     10.ph,

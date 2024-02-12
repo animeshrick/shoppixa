@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
 import '../utils/logger.dart';
-import 'api_return_model.dart';
+import 'network_model/api_return_model.dart';
 import 'apirepo.dart';
 
 class ApiRepoImp extends ApiRepo {
