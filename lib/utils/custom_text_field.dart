@@ -101,6 +101,7 @@ Widget customTextField(
                       alignLabelWithHint: true,
                       prefixIcon: prefixIcon,
                       prefixIconColor: const Color(0xff50ABFF),
+                      suffixIcon: suffixIcon,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         borderSide: const BorderSide(color: Color(0xffCFD8E7)),

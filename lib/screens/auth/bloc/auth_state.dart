@@ -1,13 +1,26 @@
 part of 'auth_bloc.dart';
 
 class AuthState extends Equatable {
-  @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
-}
+  final DynamicBlocData<String> register;
+  final DynamicBlocData<bool> passwordToggle;
+  final DynamicBlocData<bool> confPasswordToggle;
 
-class AuthInIt extends AuthState {
+  const AuthState({required this.register,
+    required this.passwordToggle,
+    required this.confPasswordToggle});
+
+  AuthState copyWith({
+    DynamicBlocData<String>? tokenCW,
+    DynamicBlocData<bool>? passwordToggleCW,
+    DynamicBlocData<bool>? confPasswordToggleCW,
+  }) {
+    return AuthState(register: tokenCW ?? register,
+      passwordToggle: passwordToggleCW ? passwordToggle,
+      confPasswordToggle: confPasswordToggleCW ? confPasswordToggle,
+    );
+  }
+
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props =>
+      [register.status, passwordToggle.status, confPasswordToggle.status,];
 }

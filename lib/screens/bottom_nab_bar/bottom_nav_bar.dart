@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:shoppixa/screens/bottom_nab_bar/vm/bottom_nav_bar_vm.dart';
 import 'package:shoppixa/screens/choose_location/address.dart';
-import 'package:shoppixa/screens/notification_view/notification_screen.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/custom_text.dart';
 
@@ -21,7 +20,9 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
       create: (_) => BottomNavBarVm(),
       child: Consumer<BottomNavBarVm>(builder: (context, bottomNavBm, __) {
         return Scaffold(
-          appBar: AppBar(
+          appBar: bottomNavBm.selectedIndex == 1
+              ? null
+              : AppBar(
                   backgroundColor: const Color(0xffffffff),
                   // backgroundColor: const Color(0xff1B6392),
                   leading: SvgPicture.asset(
@@ -54,14 +55,7 @@ class _BottomNavBarViewState extends State<BottomNavBarView> {
                       icon: const Badge(
                           padding: EdgeInsets.only(left: 10),
                           child: Icon(Icons.notifications_active_outlined)),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const NotificationScreen(
-                                  dataFromNotification: {})),
-                        );
-                      },
+                      onPressed: () {},
                     ),
                   ],
                 ),
