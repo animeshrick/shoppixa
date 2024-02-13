@@ -5,21 +5,26 @@ class AuthState extends Equatable {
   final DynamicBlocData<bool> passwordToggle;
   final DynamicBlocData<bool> confPasswordToggle;
 
-  const AuthState({required this.register,
-    required this.passwordToggle,
-    required this.confPasswordToggle});
+  const AuthState(
+      {required this.register,
+      required this.passwordToggle,
+      required this.confPasswordToggle});
 
   AuthState copyWith({
     DynamicBlocData<String>? tokenCW,
     DynamicBlocData<bool>? passwordToggleCW,
     DynamicBlocData<bool>? confPasswordToggleCW,
   }) {
-    return AuthState(register: tokenCW ?? register,
+    return AuthState(
+        register: tokenCW ?? register,
         passwordToggle: passwordToggleCW ?? passwordToggle,
-        confPasswordToggle: confPasswordToggleCW ? confPasswordToggle);
+        confPasswordToggle: confPasswordToggleCW ?? confPasswordToggle);
   }
 
   @override
-  List<Object?> get props =>
-      [register.status, passwordToggle.status, confPasswordToggle.status,];
+  List<Object?> get props => [
+        register.status,
+        passwordToggle.status,
+        confPasswordToggle.status,
+      ];
 }
