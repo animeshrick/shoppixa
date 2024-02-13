@@ -15,9 +15,8 @@ class AuthState extends Equatable {
     DynamicBlocData<bool>? confPasswordToggleCW,
   }) {
     return AuthState(register: tokenCW ?? register,
-      passwordToggle: passwordToggleCW ? passwordToggle,
-      confPasswordToggle: confPasswordToggleCW ? confPasswordToggle,
-    );
+        passwordToggle: passwordToggleCW ?? passwordToggle,
+        confPasswordToggle: confPasswordToggleCW ? confPasswordToggle);
   }
 
   @override
