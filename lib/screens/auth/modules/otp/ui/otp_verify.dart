@@ -3,15 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:provider/provider.dart';
 import 'package:shoppixa/network/dynamic_data/dynamic_data.dart';
-import 'package:shoppixa/screens/auth/bloc/auth_bloc.dart';
+import 'package:shoppixa/screens/auth/modules/otp/bloc/otp_bloc.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/extension/extended_sizedbox.dart';
 
-import '../../../../utils/custom_buttons/custom_elevated_btn.dart';
-import '../../../../utils/custom_text.dart';
-import '../../../../utils/pop_up/pop_over.dart';
+import '../../../../../utils/custom_buttons/custom_elevated_btn.dart';
+import '../../../../../utils/custom_text.dart';
+import '../../../../../utils/pop_up/pop_over.dart';
 
 class OtpVerify extends StatefulWidget {
   final String emailID;
@@ -33,7 +32,7 @@ class _OtpVerifyState extends State<OtpVerify> {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-          (Timer timer) {
+      (Timer timer) {
         if (_start == 0) {
           setState(() {
             timer.cancel();
@@ -63,14 +62,12 @@ class _OtpVerifyState extends State<OtpVerify> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthBloc(),
-      child: BlocBuilder<AuthBloc, AuthState>(
+      create: (context) => OtpBloc(),
+      child: BlocBuilder<OtpBloc, OtpState>(
         builder: (authContext, authState) {
           return Popover(
             child: Padding(
-              padding: MediaQuery
-                  .of(context)
-                  .viewInsets,
+              padding: MediaQuery.of(context).viewInsets,
               child: Column(
                 children: [
                   Padding(
@@ -85,8 +82,8 @@ class _OtpVerifyState extends State<OtpVerify> {
                     ),
                   ),
                   Padding(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0, vertical: 8),
                     child: RichText(
                       text: TextSpan(
                           text: "Enter verification code sent to \n",
@@ -98,15 +95,15 @@ class _OtpVerifyState extends State<OtpVerify> {
                                     fontWeight: FontWeight.normal,
                                     fontSize: 14)),
                           ],
-                          style:
-                          const TextStyle(color: Colors.black54, fontSize: 18)),
+                          style: const TextStyle(
+                              color: Colors.black54, fontSize: 18)),
                       textAlign: TextAlign.center,
                     ),
                   ),
                   20.ph,
                   Padding(
-                    padding:
-                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 30),
                     child: PinCodeTextField(
                       appContext: context,
                       length: 6,
@@ -124,16 +121,16 @@ class _OtpVerifyState extends State<OtpVerify> {
                   20.ph,
                   _start == 0
                       ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      customOnlyText(
-                        "Didn't receive the code? ",
-                        style: const TextStyle(
-                            color: Colors.black54, fontSize: 15),
-                      ),
-                      TextButton(
-                        onPressed: () async {
-                          /*final myRepo = AuthRepository();
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            customOnlyText(
+                              "Didn't receive the code? ",
+                              style: const TextStyle(
+                                  color: Colors.black54, fontSize: 15),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                /*final myRepo = AuthRepository();
                           await myRepo
                               .generateOtpApiCall(
                             phoneNo: widget.phNumber.toString(),
@@ -143,54 +140,30 @@ class _OtpVerifyState extends State<OtpVerify> {
                             setState(() {});
                             startTimer();
                           });*/
-                        },
-                        child: customOnlyText(
-                          "RESEND",
-                          style: const TextStyle(
-                              color: Color(0xFF91D3B3),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
-                      )
-                    ],
-                  )
+                              },
+                              child: customOnlyText(
+                                "RESEND",
+                                style: const TextStyle(
+                                    color: Color(0xFF91D3B3),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
+                            )
+                          ],
+                        )
                       : customText("0:$_start", appBaseColor, 18,
-                      fontWeight: FontWeight.bold),
+                          fontWeight: FontWeight.bold),
                   14.ph,
                   customButton(
                     width: double.infinity,
                     height: 55,
                     btnColor: appBaseColor,
                     radius: 25,
-                    isLoading: authState.verifyOTP.status==Status.loading,
+                    isLoading: authState.verifyOTP.status == Status.loading,
                     onPressed: () async {
-                      authContext.read<AuthBloc>().add(VerifyOTPEvent(
+                      authContext.read<OtpBloc>().add(VerifyOTPEvent(
                           email: widget.emailID,
                           otp: textEditingController.text));
-                      // final _myRepo = AuthRepository();
-                      /*if (textEditingController.text.length < 5) {
-                  PopUpItems().popUpAlertNoTitle(
-                      context: context,
-                      onPressedOk: () {
-                        kIsWeb ? context.pop() : Navigator.pop(context);
-                      },
-                      content: 'OTP is not correct');
-                } else if (RSTextUtils()
-                    .isTextNotEmptyOrNull(widget.businessName.toString())) {
-                  await authViewModel.checkOtpViewModel(
-                    otp: textEditingController.text.toString(),
-                    phNo: widget.phNumber.toString(),
-                    wpConsent: widget.wpConsentValue,
-                    shopName: widget.businessName.toString(),
-                    pinCode: widget.pinCode,
-                    bbid: widget.bbId,
-                  );
-                } else {
-                  await authViewModel.checkOtpViewModel(
-                      otp: textEditingController.text.toString(),
-                      phNo: widget.phNumber.toString(),
-                      wpConsent: widget.wpConsentValue);
-                }*/
                     },
                     buttonText: "Verify",
                     buttonTextSize: 15,

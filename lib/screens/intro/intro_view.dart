@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../utils/routes/route_names.dart';
-import '../auth/ui/register.dart';
+import '../auth/modules/register/ui/register.dart';
 
 class IntroView extends StatefulWidget {
   const IntroView({super.key});

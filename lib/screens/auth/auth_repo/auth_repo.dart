@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:shoppixa/network/api_repo_imp.dart';
 import 'package:shoppixa/network/urls/app_urls.dart';
 import 'package:shoppixa/screens/auth/model/register_request_model.dart';
@@ -29,7 +31,9 @@ class AuthenticationRepo {
           method: Method.post,
           headers: {'Content-Type': 'application/json'});
       if (data?.responseString != null) {
-        var resp = data?.responseString;
+        String resp = data?.responseString ?? "";
+        // ApiReturnModel resp1 = ApiReturnModel.fromJson(json.decode(resp));
+
         /*return resp['successMessage'];*/
         return data;
       }
@@ -70,14 +74,10 @@ class AuthenticationRepo {
     return null;
   }
 
-  Future<ApiReturnModel?> verifyOTPApiCall({
-    required String email,
-    required String otp
-  }) async {
+  Future<ApiReturnModel?> verifyOTPApiCall(
+      {required String email, required String otp}) async {
     try {
-      VerifyOtpModel payload = VerifyOtpModel(
-        email: email,otp: otp
-      );
+      VerifyOtpModel payload = VerifyOtpModel(email: email, otp: otp);
       ApiReturnModel? data = await apiRepo().callApi(
           tag: 'User Register',
           uri: AppUrl().verifyOTP(),

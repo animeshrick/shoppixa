@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoppixa/network/dynamic_data/dynamic_data.dart';
-import 'package:shoppixa/screens/auth/bloc/auth_bloc.dart';
+import 'package:shoppixa/screens/auth/modules/register/bloc/register_bloc.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/custom_buttons/cross_btn.dart';
 import 'package:shoppixa/utils/custom_buttons/custom_elevated_btn.dart';
@@ -12,8 +12,8 @@ import 'package:shoppixa/utils/custom_text_field.dart';
 import 'package:shoppixa/utils/extension/extended_sizedbox.dart';
 import 'package:shoppixa/utils/validator/validator.dart';
 
-import '../../../utils/pop_up/popup_items.dart';
-import '../../../utils/routes/route_names.dart';
+import '../../../../../utils/pop_up/popup_items.dart';
+import '../../../../../utils/routes/route_names.dart';
 
 class AppSingUp extends StatefulWidget {
   const AppSingUp({super.key});
@@ -33,19 +33,19 @@ class _AppSingUpState extends State<AppSingUp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthBloc(),
-      child: BlocBuilder<AuthBloc, AuthState>(
-        builder: (authContext, authState) {
+      create: (context) => RegisterBloc(),
+      child: BlocBuilder<RegisterBloc, RegisterState>(
+        builder: (registerContext, registerState) {
           return SafeArea(
             child: Scaffold(
               body: Form(
                 key: formKey,
                 child: SingleChildScrollView(
                   keyboardDismissBehavior:
-                      ScrollViewKeyboardDismissBehavior.onDrag,
+                  ScrollViewKeyboardDismissBehavior.onDrag,
                   child: Container(
                     padding:
-                        const EdgeInsets.only(left: 15, right: 15, top: 35),
+                    const EdgeInsets.only(left: 15, right: 15, top: 35),
                     color: Colors.white70,
                     child: Column(
                       children: <Widget>[
@@ -61,7 +61,7 @@ class _AppSingUpState extends State<AppSingUp> {
                               child: const FlutterLogo(),
                             ),
                             15.ph,
-                            customText(authState.register.message ?? "",
+                            customText(registerState.register.message ?? "",
                                 Colors.red, 14),
                             15.ph,
                             Row(
@@ -71,10 +71,6 @@ class _AppSingUpState extends State<AppSingUp> {
                                     child: customTextField(
                                         isNeedDesign: true,
                                         isAutoFocus: true,
-                                        /* isEnable: authState.isRegister.status ==
-                                                Status.loading
-                                            ? false
-                                            : true,*/
                                         controller: fName,
                                         hintText: "First Name",
                                         labelText: "First Name",
@@ -131,23 +127,26 @@ class _AppSingUpState extends State<AppSingUp> {
                                 controller: confPassword,
                                 hintText: "Confirm Password",
                                 labelText: "Confirm Password",
-                                obscureText: true,
+                                obscureText: registerState.showConfPassword
+                                    .value == null ? false: true,
                                 maxLines: 1,
                                 isLast: true,
                                 prefixIcon: const Icon(Icons.password_sharp,
                                     color: appBaseColor),
                                 suffixIcon: InkWell(
-                                  onTap: () {},
-                                  child: Icon(Icons.visibility_off),
-                                ),
+                                    onTap: () {
+                                      registerContext.read<RegisterBloc>().add(
+                                          ShowHideConfPassword());
+                                    },
+                                    child: Icon(Icons.visibility_off)),
                                 validator: (val) {
                                   return Validator().validatePassword(val);
                                 }),
                             15.ph,
                             customButton(
                                 width: double.infinity,
-                                isLoading:
-                                    authState.register.status == Status.loading,
+                                isLoading: registerState.register.status ==
+                                    Status.loading,
                                 height: 42,
                                 radius: 42,
                                 btnColor: appBaseColor,
@@ -159,7 +158,7 @@ class _AppSingUpState extends State<AppSingUp> {
                                           "Passwords doesn't match",
                                           Colors.red);
                                     } else {
-                                      authContext.read<AuthBloc>().add(
+                                      registerContext.read<RegisterBloc>().add(
                                           RegisterCall(
                                               fName: fName.text,
                                               lName: lName.text,
