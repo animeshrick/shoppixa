@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
+import 'package:shoppixa/network/dynamic_data/dynamic_data.dart';
+import 'package:shoppixa/screens/auth/bloc/auth_bloc.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/extension/extended_sizedbox.dart';
 
@@ -29,7 +33,7 @@ class _OtpVerifyState extends State<OtpVerify> {
     const oneSec = Duration(seconds: 1);
     _timer = Timer.periodic(
       oneSec,
-      (Timer timer) {
+          (Timer timer) {
         if (_start == 0) {
           setState(() {
             timer.cancel();
@@ -58,62 +62,68 @@ class _OtpVerifyState extends State<OtpVerify> {
 
   @override
   Widget build(BuildContext context) {
-    return Popover(
-      child: Padding(
-        padding: MediaQuery.of(context).viewInsets,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: customOnlyText(
-                'Verify OTP',
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: appBaseColor),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
-              child: RichText(
-                text: TextSpan(
-                    text: "Enter verification code sent to \n",
-                    children: [
-                      TextSpan(
-                          text: widget.emailID,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 14)),
-                    ],
-                    style:
-                        const TextStyle(color: Colors.black54, fontSize: 18)),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            20.ph,
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
-              child: PinCodeTextField(
-                appContext: context,
-                length: 6,
-                blinkWhenObscuring: true,
-                animationType: AnimationType.fade,
-                cursorColor: Colors.black,
-                animationDuration: const Duration(milliseconds: 300),
-                enableActiveFill: false,
-                errorAnimationController: errorController,
-                controller: textEditingController,
-                keyboardType: TextInputType.number,
-                onChanged: (val) {},
-              ),
-            ),
-            20.ph,
-            _start == 0
-                ? Row(
+    return BlocProvider(
+      create: (context) => AuthBloc(),
+      child: BlocBuilder<AuthBloc, AuthState>(
+        builder: (authContext, authState) {
+          return Popover(
+            child: Padding(
+              padding: MediaQuery
+                  .of(context)
+                  .viewInsets,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: customOnlyText(
+                      'Verify OTP',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 22,
+                          color: appBaseColor),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+                    child: RichText(
+                      text: TextSpan(
+                          text: "Enter verification code sent to \n",
+                          children: [
+                            TextSpan(
+                                text: widget.emailID,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 14)),
+                          ],
+                          style:
+                          const TextStyle(color: Colors.black54, fontSize: 18)),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  20.ph,
+                  Padding(
+                    padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 30),
+                    child: PinCodeTextField(
+                      appContext: context,
+                      length: 6,
+                      blinkWhenObscuring: true,
+                      animationType: AnimationType.fade,
+                      cursorColor: Colors.black,
+                      animationDuration: const Duration(milliseconds: 300),
+                      enableActiveFill: false,
+                      errorAnimationController: errorController,
+                      controller: textEditingController,
+                      keyboardType: TextInputType.number,
+                      onChanged: (val) {},
+                    ),
+                  ),
+                  20.ph,
+                  _start == 0
+                      ? Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       customOnlyText(
@@ -144,18 +154,21 @@ class _OtpVerifyState extends State<OtpVerify> {
                       )
                     ],
                   )
-                : customText("0:$_start", appBaseColor, 18,
-                    fontWeight: FontWeight.bold),
-            14.ph,
-            customButton(
-              width: double.infinity,
-              height: 55,
-              btnColor: appBaseColor,
-              radius: 25,
-              // isLoading: authViewModel.checkOtpLoading,
-              onPressed: () async {
-                // final _myRepo = AuthRepository();
-                /*if (textEditingController.text.length < 5) {
+                      : customText("0:$_start", appBaseColor, 18,
+                      fontWeight: FontWeight.bold),
+                  14.ph,
+                  customButton(
+                    width: double.infinity,
+                    height: 55,
+                    btnColor: appBaseColor,
+                    radius: 25,
+                    isLoading: authState.verifyOTP.status==Status.loading,
+                    onPressed: () async {
+                      authContext.read<AuthBloc>().add(VerifyOTPEvent(
+                          email: widget.emailID,
+                          otp: textEditingController.text));
+                      // final _myRepo = AuthRepository();
+                      /*if (textEditingController.text.length < 5) {
                   PopUpItems().popUpAlertNoTitle(
                       context: context,
                       onPressedOk: () {
@@ -178,13 +191,16 @@ class _OtpVerifyState extends State<OtpVerify> {
                       phNo: widget.phNumber.toString(),
                       wpConsent: widget.wpConsentValue);
                 }*/
-              },
-              buttonText: "Verify",
-              buttonTextSize: 15,
+                    },
+                    buttonText: "Verify",
+                    buttonTextSize: 15,
+                  ),
+                  15.ph,
+                ],
+              ),
             ),
-            15.ph,
-          ],
-        ),
+          );
+        },
       ),
     );
   }

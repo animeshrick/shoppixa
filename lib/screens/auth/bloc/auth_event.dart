@@ -17,3 +17,12 @@ class RegisterCall extends AuthEvent {
   @override
   List<Object?> get props => [];
 }
+
+class VerifyOTPEvent extends AuthEvent {
+  final String email, otp;
+
+  const VerifyOTPEvent({required this.email, required this.otp});
+
+  @override
+  List<Object?> get props => [];
+}

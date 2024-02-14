@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../../utils/routes/navigation_context.dart';
-import 'otp_view/otp_picker.dart';
 import 'otp_view/otp_verify.dart';
 
 class OtpView {
-  Future<String?> otpPicker(
+/*  Future<String?> otpPicker(
       {bool? changePinCode, String? pinCodeVal, String? buttonText}) {
     return Navigator.of(CurrentContext().context).push(
       PageRouteBuilder(
@@ -17,14 +16,9 @@ class OtpView {
                 buttonText: buttonText,
               )),
     );
-  }
+  }*/
 
   Future<String?> otpPicker2({required String phNo}) {
-/*    return Navigator.of(CurrentContext().context).push(
-      PageRouteBuilder(
-          opaque: false,
-          pageBuilder: (_, __, ___) => OtpVerify(phNumber: phNo)),
-    );*/
     return showModalBottomSheet(
       context: CurrentContext().context,
       isScrollControlled: true,
