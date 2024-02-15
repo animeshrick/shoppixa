@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shoppixa/utils/logger.dart';
+import 'package:shoppixa/utils/pop_up/popup_items.dart';
 
 import '../../../../../network/dynamic_data/dynamic_data.dart';
 import '../../../../../network/network_model/api_return_model.dart';
@@ -10,7 +12,6 @@ import '../../../auth_repo/auth_repo.dart';
 import '../../otp/ui/otp.dart';
 
 part 'register_event.dart';
-
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
@@ -39,6 +40,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
               .toString()
               .split(":")[1]
               .trim();
+          PopUpItems().toastMessage(errMsg, Colors.red);
           emit(state.copyWith(
               registerCW: DynamicBlocData.error(message: errMsg)));
         }

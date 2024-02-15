@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:shoppixa/network/api_repo_imp.dart';
 import 'package:shoppixa/network/urls/app_urls.dart';
 import 'package:shoppixa/screens/auth/model/register_request_model.dart';
@@ -8,6 +6,7 @@ import 'package:shoppixa/utils/logger.dart';
 
 import '../../../network/apirepo.dart';
 import '../../../network/network_model/api_return_model.dart';
+import '../model/login_req_model.dart';
 
 class AuthenticationRepo {
   Future<ApiReturnModel?> registerApiCall({
@@ -31,10 +30,6 @@ class AuthenticationRepo {
           method: Method.post,
           headers: {'Content-Type': 'application/json'});
       if (data?.responseString != null) {
-        String resp = data?.responseString ?? "";
-        // ApiReturnModel resp1 = ApiReturnModel.fromJson(json.decode(resp));
-
-        /*return resp['successMessage'];*/
         return data;
       }
     } catch (e, stacktrace) {
@@ -45,18 +40,11 @@ class AuthenticationRepo {
 
   Future<ApiReturnModel?> loginApiCall({
     required String email,
-    required String fName,
-    required String lName,
     required String password,
   }) async {
     try {
-      RegisterRequest regPayload = RegisterRequest(
-          email: email,
-          fname: fName,
-          lname: lName,
-          password1: password,
-          password2: password,
-          username: fName.toLowerCase());
+      LoginReqModel regPayload =
+          LoginReqModel(email: email, password: password);
       ApiReturnModel? data = await apiRepo().callApi(
           tag: 'User Register',
           uri: AppUrl().login(),
@@ -64,8 +52,6 @@ class AuthenticationRepo {
           method: Method.post,
           headers: {'Content-Type': 'application/json'});
       if (data?.responseString != null) {
-        var resp = data?.responseString;
-        /*return resp['successMessage'];*/
         return data;
       }
     } catch (e, stacktrace) {

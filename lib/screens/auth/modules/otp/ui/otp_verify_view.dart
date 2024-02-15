@@ -12,16 +12,16 @@ import '../../../../../utils/custom_buttons/custom_elevated_btn.dart';
 import '../../../../../utils/custom_text.dart';
 import '../../../../../utils/pop_up/pop_over.dart';
 
-class OtpVerify extends StatefulWidget {
+class OtpVerifyView extends StatefulWidget {
   final String emailID;
 
-  const OtpVerify({super.key, required this.emailID});
+  const OtpVerifyView({super.key, required this.emailID});
 
   @override
-  State<OtpVerify> createState() => _OtpVerifyState();
+  State<OtpVerifyView> createState() => _OtpVerifyViewState();
 }
 
-class _OtpVerifyState extends State<OtpVerify> {
+class _OtpVerifyViewState extends State<OtpVerifyView> {
   final formKey = GlobalKey<FormState>();
   StreamController<ErrorAnimationType>? errorController;
   TextEditingController textEditingController = TextEditingController();

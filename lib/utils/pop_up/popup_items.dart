@@ -40,10 +40,7 @@ class PopUpItems {
   void toastMessage(String message, Color color, {int? durationSeconds}) {
     SnackBar snackBar = SnackBar(
       duration: Duration(seconds: durationSeconds ?? 2),
-      content: ToastMassage(
-        message: message,
-        color: color,
-      ),
+      content: ToastMassage(message: message, color: color),
       elevation: 0,
       backgroundColor: Colors.transparent,
       behavior: SnackBarBehavior.floating,

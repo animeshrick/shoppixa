@@ -7,7 +7,6 @@ import 'package:shoppixa/screens/auth/modules/register/bloc/register_bloc.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/custom_buttons/cross_btn.dart';
 import 'package:shoppixa/utils/custom_buttons/custom_elevated_btn.dart';
-import 'package:shoppixa/utils/custom_text.dart';
 import 'package:shoppixa/utils/custom_text_field.dart';
 import 'package:shoppixa/utils/extension/extended_sizedbox.dart';
 import 'package:shoppixa/utils/validator/validator.dart';
@@ -42,10 +41,10 @@ class _AppSingUpState extends State<AppSingUp> {
                 key: formKey,
                 child: SingleChildScrollView(
                   keyboardDismissBehavior:
-                  ScrollViewKeyboardDismissBehavior.onDrag,
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   child: Container(
                     padding:
-                    const EdgeInsets.only(left: 15, right: 15, top: 35),
+                        const EdgeInsets.only(left: 15, right: 15, top: 35),
                     color: Colors.white70,
                     child: Column(
                       children: <Widget>[
@@ -61,9 +60,9 @@ class _AppSingUpState extends State<AppSingUp> {
                               child: const FlutterLogo(),
                             ),
                             15.ph,
-                            customText(registerState.register.message ?? "",
+                            /* customText(registerState.register.message ?? "",
                                 Colors.red, 14),
-                            15.ph,
+                            15.ph,*/
                             Row(
                               children: <Widget>[
                                 Flexible(
@@ -127,16 +126,19 @@ class _AppSingUpState extends State<AppSingUp> {
                                 controller: confPassword,
                                 hintText: "Confirm Password",
                                 labelText: "Confirm Password",
-                                obscureText: registerState.showConfPassword
-                                    .value == null ? false: true,
+                                obscureText:
+                                    registerState.showConfPassword.value == null
+                                        ? false
+                                        : true,
                                 maxLines: 1,
                                 isLast: true,
                                 prefixIcon: const Icon(Icons.password_sharp,
                                     color: appBaseColor),
                                 suffixIcon: InkWell(
                                     onTap: () {
-                                      registerContext.read<RegisterBloc>().add(
-                                          ShowHideConfPassword());
+                                      registerContext
+                                          .read<RegisterBloc>()
+                                          .add(ShowHideConfPassword());
                                     },
                                     child: Icon(Icons.visibility_off)),
                                 validator: (val) {

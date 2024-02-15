@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shoppixa/utils/extension/extended_sizedbox.dart';
 
 import '../constants/app_color.dart';
@@ -30,16 +31,12 @@ class ToastMassage extends StatelessWidget {
                   decoration: const BoxDecoration(
                       color: white,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Image.asset(
-                      height: 30, width: 30, 'assets/images/loader_1.png')),
+                  child: SvgPicture.asset('assets/icons/Error.svg')),
               10.pw,
               SizedBox(
                 width: 200,
-                child: customOverflowText(
-                  message,
-                  white,
-                  13,
-                ),
+                child: customOverflowText(message, white, 13,
+                    textAlign: TextAlign.center),
               ),
             ],
           ),
