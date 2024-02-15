@@ -1,10 +1,10 @@
 import 'package:go_router/go_router.dart';
-import 'package:shoppixa/screens/auth/ui/login.dart';
+import 'package:shoppixa/screens/auth/modules/login/ui/login.dart';
 import 'package:shoppixa/screens/choose_location/choose_location.dart';
 import 'package:shoppixa/screens/super_pdf/super_pdf.dart';
 import 'package:shoppixa/utils/routes/route_names.dart';
 
-import '../../screens/auth/ui/register.dart';
+import '../../screens/auth/modules/register/ui/register.dart';
 import '../../screens/bottom_nab_bar/bottom_nav_bar.dart';
 import '../../screens/choose_location/address.dart';
 import '../../screens/intro/intro_view.dart';

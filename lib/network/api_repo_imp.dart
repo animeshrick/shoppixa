@@ -91,7 +91,7 @@ class ApiRepoImp extends ApiRepo {
               .send()
               .timeout(timeout());
 
-      if (response.statusCode == 200) {
+      /*if (response.statusCode == 200) {*/
         String responseReturn = await response.stream.bytesToString();
         AppLog.i(tag: "$tag Response", responseReturn, time: DateTime.now());
         AppLog.i(
@@ -100,15 +100,17 @@ class ApiRepoImp extends ApiRepo {
             time: DateTime.now());
         return ApiReturnModel(
             statusCode: response.statusCode, responseString: responseReturn);
-      } else {
+     /* } else {
         AppLog.i(
             tag: "$tag Response code",
             "${response.statusCode}",
             time: DateTime.now());
         return ApiReturnModel(
             statusCode: response.statusCode,
-            responseString: response.reasonPhrase);
-      }
+            responseString: response.reasonPhrase,
+          message: response.stream.bytesToString().toString()
+        );
+      }*/
     } catch (e) {
       AppLog.e(e, time: DateTime.now());
     }
