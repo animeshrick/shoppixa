@@ -5,6 +5,11 @@ buildscript {
         mavenCentral()
     }
 
+    ext {
+        clientId = "sastasundar"
+        hyperSDKVersion = "2.1.24"
+    }
+
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }

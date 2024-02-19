@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/custom_buttons/custom_back_button.dart';
+import 'package:shoppixa/utils/custom_buttons/custom_elevated_btn.dart';
 
 import '../home/common_widgets/product_model.dart';
 import 'components/color_dotss.dart';
@@ -9,19 +11,18 @@ import 'components/product_images.dart';
 import 'components/top_rounded_container.dart';
 
 class ProductDetailsView extends StatelessWidget {
-final Product product;
+  final Product product;
 
   const ProductDetailsView({super.key, required this.product});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
-      backgroundColor: const Color(0xFFF5F6F9),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: CustomBackButton(),
+        leading: const CustomBackButton(),
         actions: [
           Row(
             children: [
@@ -30,7 +31,7 @@ final Product product;
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: const Color(0xFFF5F6F9),
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Row(
@@ -80,14 +81,14 @@ final Product product;
         color: Colors.white,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            child: ElevatedButton(
-              onPressed: () {
-                // Navigator.pushNamed(context, CartScreen.routeName);
-              },
-              child: const Text("Add To Cart"),
-            ),
-          ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: customButton(
+                  buttonText: "Add to cart",
+                  onPressed: () {},
+                  radius: 30,
+                  height: 48,
+                  buttonTextSize: 14,
+                  btnColor: appBaseColor)),
         ),
       ),
     );

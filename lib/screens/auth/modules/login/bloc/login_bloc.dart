@@ -10,6 +10,7 @@ import '../../../../../resources/local_storeage/token_sp/token_sp.dart';
 import '../../../../../utils/pop_up/popup_items.dart';
 import '../../../../../utils/routes/navigation_context.dart';
 import '../../../../../utils/routes/route_names.dart';
+import '../../../../../utils/text_utils.dart';
 import '../../../auth_repo/auth_repo.dart';
 
 part 'login_event.dart';
@@ -30,10 +31,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
           Map<String, dynamic> tokenData =
               json.decode(resp.responseString ?? "")["token"];
-
-          TokenSP().saveAccessToken(tokenData['access']);
-          TokenSP().saveRefreshToken(tokenData['refresh']);
-          CurrentContext().context.goNamed(MyRoutes.home);
+          if (TextUtils().isTextNotEmptyOrNull(tokenData)) {
+            TokenSP().saveAccessToken(tokenData['access']);
+            TokenSP().saveRefreshToken(tokenData['refresh']);
+            // CustomRoute().back();
+            CurrentContext().context.goNamed(MyRoutes.home);
+          }
         } else {
           String? errMsg = json
               .decode(resp?.responseString ?? "")['errorMessage']

@@ -3,10 +3,10 @@ import 'dart:math';
 import 'package:app_settings/app_settings.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shoppixa/utils/logger.dart';
+import 'package:shoppixa/utils/routes/navigation_context.dart';
 import 'package:shoppixa/utils/routes/route_names.dart';
 
 class FirebaseNotificationService {
@@ -14,6 +14,19 @@ class FirebaseNotificationService {
 
   final FlutterLocalNotificationsPlugin localNotification =
       FlutterLocalNotificationsPlugin();
+
+  Future<String> checkNotificationStatus() async {
+    NotificationSettings settings = await firebaseMessaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+    return settings.authorizationStatus.name;
+  }
 
   Future<void> requestNotificationPermission() async {
     /// request permission
@@ -26,7 +39,7 @@ class FirebaseNotificationService {
       provisional: false,
       sound: true,
     );
-    AppLog.w('User permission status: ${settings.authorizationStatus}');
+    // AppLog.w('User permission status: ${settings.authorizationStatus}');
 
     /// Permission granted
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
@@ -55,7 +68,7 @@ class FirebaseNotificationService {
   Future<String> getDeviceToken() async {
     /// device token
     String? fcmToken = await firebaseMessaging.getToken();
-    AppLog.w("Token: $fcmToken");
+    AppLog.i("FCM-Token: $fcmToken");
     return fcmToken ?? "";
   }
 
@@ -65,8 +78,7 @@ class FirebaseNotificationService {
     });
   }
 
-  Future<void> initLocalNotifications(
-      BuildContext context, RemoteMessage message) async {
+  Future<void> initLocalNotifications(RemoteMessage message) async {
     /* handle local notification when user inside app */
 
     /// android
@@ -83,11 +95,11 @@ class FirebaseNotificationService {
     await localNotification.initialize(initSetting,
         onDidReceiveNotificationResponse: (payload) {
       print("Local-Notification handleMessage");
-      handleMessage(context, message);
+      handleMessage(message);
     });
   }
 
-  void firebaseInit(BuildContext context) {
+  void firebaseInit() {
     /// handle on message event
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       if (kDebugMode) {
@@ -97,7 +109,7 @@ class FirebaseNotificationService {
         AppLog.w('Message Data: ${message.data}');
       }
       // if (Platform.isAndroid) {
-      initLocalNotifications(context, message);
+      initLocalNotifications(message);
       showNotification(message);
       if (kIsWeb) {
         /// web
@@ -152,23 +164,23 @@ class FirebaseNotificationService {
     });
   }
 
-  Future<void> setupInteractMessage(BuildContext context) async {
+  Future<void> setupInteractMessage() async {
     /// when app is killed/ terminated
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
       print("when app is killed/ terminated");
-      handleMessage(context, initialMessage);
+      handleMessage(initialMessage);
     }
 
     /// when app is background
     FirebaseMessaging.onMessageOpenedApp.listen((event) {
       print("when app is background");
-      handleMessage(context, event);
+      handleMessage(event);
     });
   }
 
-  void handleMessage(BuildContext context, RemoteMessage message) {
+  void handleMessage(RemoteMessage message) {
     if (message.data != {}) {
       /* Navigator.push(
           context,
@@ -177,9 +189,13 @@ class FirebaseNotificationService {
                 dataFromNotification: message.data ?? {},
               )));*/
       if (kIsWeb) {
-        context.goNamed(MyRoutes.notification, extra: message.data);
+        CurrentContext()
+            .context
+            .goNamed(MyRoutes.notification, extra: message.data);
       } else {
-        context.pushNamed(MyRoutes.notification, extra: message.data);
+        CurrentContext()
+            .context
+            .pushNamed(MyRoutes.notification, extra: message.data);
       }
     }
   }

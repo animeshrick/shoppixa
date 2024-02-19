@@ -26,7 +26,7 @@ class CartCard extends StatelessWidget {
                 color: const Color(0xFFF5F6F9),
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: Image.asset(cart.product.imageUrl),
+              child: Image.asset(cart.product.thumbnail ?? ""),
             ),
           ),
         ),
@@ -36,7 +36,8 @@ class CartCard extends StatelessWidget {
           children: [
             SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.5,
-                child: customOverflowText(cart.product.name, Colors.black, 16,
+                child: customOverflowText(
+                    cart.product.name ?? "", Colors.black, 16,
                     maxLines: 2, textAlign: TextAlign.start)),
             const SizedBox(height: 8),
             Text.rich(

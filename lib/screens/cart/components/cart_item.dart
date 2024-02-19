@@ -27,7 +27,7 @@ class CartItem extends StatelessWidget {
         children: [
           /// image
           Image.asset(
-            product.imageUrl,
+            product.thumbnail ?? "",
             width: 70,
           ),
 
@@ -37,7 +37,7 @@ class CartItem extends StatelessWidget {
             children: [
               SizedBox(
                 width: 100,
-                child: customOverflowText(product.name, Colors.black, 14,
+                child: customOverflowText(product.name ?? "", Colors.black, 14,
                     fontWeight: FontWeight.w600,
                     maxLines: 2,
                     textAlign: TextAlign.start),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
+
 import '../../../utils/custom_buttons/rounded_icon_btn.dart';
 import '../../home/common_widgets/product_model.dart';
 
@@ -13,19 +14,19 @@ class ColorDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Now this is fixed and only for demo
+    List<Color> colors = [Colors.red, Colors.blue, appBaseColor, Colors.yellow];
     int selectedColor = 3;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         children: [
-          /*...List.generate(
-            product.colors.length,
-                (index) => ColorDot(
-              color: product.colors[index],
+          ...List.generate(
+            colors.length,
+            (index) => ColorDot(
+              color: colors[index],
               isSelected: index == selectedColor,
             ),
-          ),*/
+          ),
           const Spacer(),
           RoundedIconBtn(
             icon: Icons.remove,
@@ -63,7 +64,7 @@ class ColorDot extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.transparent,
         border:
-        Border.all(color: isSelected ? appBaseColor : Colors.transparent),
+            Border.all(color: isSelected ? appBaseColor : Colors.transparent),
         shape: BoxShape.circle,
       ),
       child: DecoratedBox(

@@ -4,6 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TextUtils {
+  String capitalizeFirst(String word) {
+    return word.substring(0, 1).toUpperCase() + word.substring(1);
+  }
+
   bool isNonZeroNumericValue(String txt) {
     if (isTextNotEmptyOrNull(txt)) {
       try {

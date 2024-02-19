@@ -15,7 +15,7 @@ class ShortProductCard extends StatelessWidget {
     return Column(
       children: [
         Image.asset(
-          product.imageUrl,
+          product.thumbnail ?? "",
           height: 110.0,
           fit: BoxFit.cover,
         ),
@@ -31,7 +31,7 @@ class ShortProductCard extends StatelessWidget {
           ),
           child: Column(
             children: [
-              customText(product.name, Colors.black, 16,
+              customText(product.name ?? "", Colors.black, 16,
                   fontWeight: FontWeight.w500),
               const SizedBox(height: 5),
               Row(

@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:shoppixa/resources/local_storeage/token_sp/token_sp.dart';
 import 'package:shoppixa/screens/profile/componets/profile_menu.dart';
 import 'package:shoppixa/screens/profile/componets/profile_pic.dart';
+import 'package:shoppixa/utils/routes/navigation_context.dart';
+import 'package:shoppixa/utils/routes/route_names.dart';
 
-class UserProfile extends StatelessWidget {
+class UserProfile extends StatefulWidget {
+  @override
+  State<UserProfile> createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfile> {
+  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +31,8 @@ class UserProfile extends StatelessWidget {
               text: "More",
               icon: "assets/icons/Bill Icon.svg",
               press: () {},
-            ),ProfileMenu(
+            ),
+            ProfileMenu(
               text: "Notifications",
               icon: "assets/icons/Bell.svg",
               press: () {},
@@ -39,7 +50,11 @@ class UserProfile extends StatelessWidget {
             ProfileMenu(
               text: "Log Out",
               icon: "assets/icons/Log out.svg",
-              press: () {},
+              press: () async {
+                await TokenSP().clearTokens().then((value) {
+                  CurrentContext().context.goNamed(MyRoutes.home);
+                });
+              },
             ),
           ],
         ),

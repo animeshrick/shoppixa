@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -123,11 +124,10 @@ class PopUpItems {
           );
   }
 
-/*  showExitPopup(BuildContext context) async {
-    User? user = await UserSession().getUser();
+  Future<bool> showExitPopup() async {
     return await showModalBottomSheet(
           backgroundColor: Colors.transparent,
-          context: context,
+          context: CurrentContext().context,
           builder: (context) => BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 3),
             child: Scaffold(
@@ -140,30 +140,21 @@ class PopUpItems {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      const SizedBox(
-                        height: 15,
-                      ),
+                      const SizedBox(height: 15),
+                      customOnlyText("Hi!",
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.w600)),
+                      const SizedBox(height: 15),
                       customOnlyText(
-                        "Hi! ${user?.fullName.toString().toUpperCase()}",
-                        style: const TextStyle(
+                          "Are you sure, you want to exit from the app?",
+                          style: const TextStyle(
+                            fontSize: 14,
                             color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.w600),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      customOnlyText(
-                        "Are you sure, you want to exit from the app?",
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(
-                        height: 22,
-                      ),
+                          ),
+                          textAlign: TextAlign.center),
+                      const SizedBox(height: 22),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -189,7 +180,7 @@ class PopUpItems {
                                 )),
                           ),
                         ],
-                      ),
+                      )
                     ],
                   ),
                 ),
@@ -198,7 +189,7 @@ class PopUpItems {
           ),
         ) ??
         false;
-  }*/
+  }
 
 /*  willPopShowAlertPopup(BuildContext context,
       {required String content,

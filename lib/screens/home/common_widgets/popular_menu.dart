@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shoppixa/utils/custom_text.dart';
+import 'package:shoppixa/utils/routes/route_names.dart';
 
 class PopularMenu extends StatelessWidget {
   double? width, height = 55.0;
@@ -79,7 +81,9 @@ class PopularMenu extends StatelessWidget {
                 decoration: const BoxDecoration(
                     shape: BoxShape.circle, color: Color(0xFFF2F3F7)),
                 child: RawMaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.go(MyRoutes.moreCategory);
+                  },
                   shape: const CircleBorder(),
                   child: const Icon(
                     Icons.clear_all_outlined,

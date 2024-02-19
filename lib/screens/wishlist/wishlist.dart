@@ -75,48 +75,17 @@ import 'package:shoppixa/screens/wishlist/product_card.dart';
 
 import '../home/common_widgets/product_model.dart';
 
-class Wishlist extends StatelessWidget {
+class Wishlist extends StatefulWidget {
   const Wishlist({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final List<Product> products = [
-      Product("123646464", 'iPhone 15', 'Buy iPhone 15',
-          'assets/logo/intro.jpg', "1500", "150", false),
-      Product(
-          "123111111",
-          'Apple Macbook M2',
-          'Buy 13-inch MacBook Air with M2 Chip',
-          'assets/logo/intro.jpg',
-          "14991",
-          "1750",
-          true),
-      Product(
-          "12342424",
-          'Smart Watch',
-          'Smart Watches - Up to 70% Off - Buy Premium',
-          'assets/logo/intro.jpg',
-          "1000",
-          "250",
-          false),
-      Product(
-          "12323242424",
-          'Water Purifier',
-          'Buy Best Water Purifier | Water Filter For Home',
-          'assets/logo/intro.jpg',
-          "500",
-          "450",
-          false),
-      Product(
-          "123244234242",
-          'Water Purifier',
-          'Buy Best Water Purifier | Water Filter For Home',
-          'assets/logo/intro.jpg',
-          "500",
-          "450",
-          false),
-    ];
+  State<Wishlist> createState() => _WishlistState();
+}
 
+class _WishlistState extends State<Wishlist> {
+  @override
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: [
@@ -126,10 +95,10 @@ class Wishlist extends StatelessWidget {
               child: GridView.builder(
                 itemCount: products.length,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                                        maxCrossAxisExtent: 200,
-                      childAspectRatio: 0.9,
-                      mainAxisSpacing: 20,
-                      crossAxisSpacing: 16,
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 0.7,
+                  mainAxisSpacing: 20,
+                  crossAxisSpacing: 16,
                 ),
                 itemBuilder: (context, index) => ProductCard(
                   product: products[index],

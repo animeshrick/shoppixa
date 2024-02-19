@@ -6,10 +6,11 @@ import 'package:go_router/go_router.dart';
 import 'package:shoppixa/resources/local_storeage/token_sp/token_sp.dart';
 import 'package:shoppixa/utils/pop_up/popup_items.dart';
 import 'package:shoppixa/utils/routes/navigation_context.dart';
-import 'package:shoppixa/utils/routes/route_names.dart';
+import 'package:shoppixa/utils/text_utils.dart';
 
 import '../../../../../network/dynamic_data/dynamic_data.dart';
 import '../../../../../network/network_model/api_return_model.dart';
+import '../../../../../utils/routes/route_names.dart';
 import '../../../auth_repo/auth_repo.dart';
 
 part 'otp_event.dart';
@@ -31,10 +32,12 @@ class OtpBloc extends Bloc<OtpEvent, OtpState> {
 
           Map<String, dynamic> tokenData =
               json.decode(resp.responseString ?? "")["token"];
-
-          TokenSP().saveAccessToken(tokenData['access']);
-          TokenSP().saveRefreshToken(tokenData['refresh']);
-          CurrentContext().context.goNamed(MyRoutes.home);
+          if (TextUtils().isTextNotEmptyOrNull(tokenData)) {
+            TokenSP().saveAccessToken(tokenData['access']);
+            TokenSP().saveRefreshToken(tokenData['refresh']);
+            //CustomRoute().back();
+            CurrentContext().context.goNamed(MyRoutes.home);
+          }
         } else {
           String? errMsg = json
               .decode(resp?.responseString ?? "")['errorMessage']

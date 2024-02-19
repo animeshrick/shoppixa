@@ -6,12 +6,25 @@ class TokenSP {
   final accessToken = 'access';
 
   Future<bool> isLoginUser() async {
-    return TextUtils().isTextNotEmptyOrNull(
-        await getAccessToken() ?? await getRefreshToken());
+    if (TextUtils().isTextNotEmptyOrNull(await getAccessToken())) {
+      return true;
+    } else if (TextUtils().isTextNotEmptyOrNull(await getRefreshToken())) {
+      return true;
+    } else {
+      return false;
+    }
+    /*return TextUtils().isTextNotEmptyOrNull(
+        await getAccessToken() ?? await getRefreshToken());*/
   }
 
   Future<void> init() async {
     await SharedPreferences.getInstance();
+  }
+
+  Future<void> clearTokens() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove(refreshToken);
+    await prefs.remove(accessToken);
   }
 
   Future<void> clearRefreshTokenSp() async {

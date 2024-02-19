@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:shoppixa/utils/routes/customRoute.dart';
 
 import '../constants/app_color.dart';
-import '../routes/route_names.dart';
 
 class CrossBtn extends StatelessWidget {
   const CrossBtn({super.key});
@@ -16,7 +14,7 @@ class CrossBtn extends StatelessWidget {
       child: InkWell(
         child: const Icon(Icons.close, color: appBaseColor),
         onTap: () {
-          Navigator.of(context).pop();
+          CustomRoute().back();
         },
       ),
     );

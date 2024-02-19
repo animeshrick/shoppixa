@@ -7,7 +7,6 @@ import 'package:shoppixa/screens/home/greetings.dart';
 import 'package:shoppixa/screens/home/vm/home_vm.dart';
 import 'package:shoppixa/utils/custom_text.dart';
 
-import 'common_widgets/items_in_cart/item_in_cart.dart';
 import 'common_widgets/popular_menu.dart';
 import 'common_widgets/search_widget.dart';
 import 'common_widgets/top_promo_slider.dart';
@@ -23,6 +22,7 @@ class Home extends StatelessWidget {
         return SafeArea(
           child: Scaffold(
             body: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -40,10 +40,10 @@ class Home extends StatelessWidget {
                   const SearchWidget(),
                   const PromoImageSlider(),
                   PopularMenu(),
-                  DiscountBanner(),
-                  SpecialForYou(),
+                  const DiscountBanner(),
+                  const SpecialForYou(),
                   TopSelling(),
-                  ItemsInCart(),
+                  // ItemsInCart(),
                 ],
               ),
             ),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hypersdkflutter/hypersdkflutter.dart';
 import 'package:shoppixa/utils/constants/app_color.dart';
 import 'package:shoppixa/utils/custom_buttons/custom_elevated_btn.dart';
+import 'package:shoppixa/utils/routes/route_names.dart';
 
 class CheckoutCard extends StatelessWidget {
   const CheckoutCard({
@@ -79,7 +82,9 @@ class CheckoutCard extends StatelessWidget {
                         btnColor: appBaseColor,
                         height: 42,
                         width: 50,
-                        onPressed: () {},
+                        onPressed: () {
+                          context.go(MyRoutes.juspayUI, extra: HyperSDK());
+                        },
                         buttonTextSize: 14,
                         buttonText: "Check Out")),
               ],

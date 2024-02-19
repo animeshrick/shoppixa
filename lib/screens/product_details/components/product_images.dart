@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../utils/constants/app_color.dart';
 import '../../home/common_widgets/product_model.dart';
 
@@ -24,7 +25,7 @@ class _ProductImagesState extends State<ProductImages> {
           width: 238,
           child: AspectRatio(
             aspectRatio: 1,
-            child: Image.asset(widget.product.imageUrl),
+            child: Image.asset(widget.product.thumbnail ?? ""),
           ),
         ),
         // SizedBox(height: 20),
@@ -32,15 +33,15 @@ class _ProductImagesState extends State<ProductImages> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ...List.generate(
-              5,
-                  (index) => SmallProductImage(
+              widget.product.images?.length ?? 0,
+              (index) => SmallProductImage(
                 isSelected: index == selectedImage,
                 press: () {
                   setState(() {
                     selectedImage = index;
                   });
                 },
-                image: widget.product.imageUrl,
+                image: widget.product.images!.elementAt(index),
               ),
             ),
           ],
@@ -53,9 +54,9 @@ class _ProductImagesState extends State<ProductImages> {
 class SmallProductImage extends StatefulWidget {
   const SmallProductImage(
       {super.key,
-        required this.isSelected,
-        required this.press,
-        required this.image});
+      required this.isSelected,
+      required this.press,
+      required this.image});
 
   final bool isSelected;
   final VoidCallback press;

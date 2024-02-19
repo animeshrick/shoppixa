@@ -22,8 +22,9 @@ class SearchWidget extends StatelessWidget {
         onTap: () {},
         child: Container(
           width: double.infinity,
+          padding: const EdgeInsets.all(2),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(30.0),
             border: Border.all(
               color: Colors.black54,
               width: 1.0,
@@ -35,7 +36,7 @@ class SearchWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: CircleAvatar(
-                  backgroundColor: Colors.black12,
+                  backgroundColor: Colors.grey.withOpacity(0.1),
                   child: IconButton(
                     icon: const Icon(Icons.search),
                     color: appBaseColor,

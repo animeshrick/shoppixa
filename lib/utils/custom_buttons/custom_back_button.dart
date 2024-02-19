@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:shoppixa/utils/constants/app_color.dart';
+import 'package:shoppixa/utils/routes/customRoute.dart';
 
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({super.key});
 
   @override
   Widget build(BuildContext context) {
- /*   return Padding(
+    /*   return Padding(
       padding: const EdgeInsets.only(left: 15),
       child: CircleAvatar(
           radius: 15,
@@ -24,7 +24,7 @@ class CustomBackButton extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pop(context);
+          CustomRoute().back();
         },
         style: ElevatedButton.styleFrom(
           shape: const CircleBorder(),
